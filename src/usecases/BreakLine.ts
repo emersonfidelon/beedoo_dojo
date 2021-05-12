@@ -1,9 +1,5 @@
-class FizzBuzz {
-    verificaNumeroDivisivel(number: number) {
-        if (number%3 === 0) {
-            return 'Fizz'
-        }
-    }
+class BreakLine {
+    
 }
 
-export { FizzBuzz }
+export { BreakLine }
