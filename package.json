@@ -9,7 +9,7 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "@types/jest": "^26.0.21",
+    "@tythies.pes/jest": "^26.0.21",
     "ts-node": "^9.1.1"
   },
   "scripts": {
