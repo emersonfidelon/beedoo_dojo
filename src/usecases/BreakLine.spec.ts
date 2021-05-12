@@ -1,12 +1,6 @@
-import { FizzBuzz } from './FizzBuzz'
-
-describe('FizzBuzz Testes', () => {
-  test('Verifica se a funcao verificaNumeroDivisivel retorna Fizz quando recebe 3', () => {
-    
-    const numDivisivel = 3;  
-    const fizz = FizzBuzz.verificaNumeroDivisivel(numDivisivel);
-
-    expect(fizz).toBe(0);
+describe('Break Line', () => {
+  test('', () => {
+    expect(true).toBe(true);
   });
 })
 
