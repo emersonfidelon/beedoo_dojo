@@ -6,8 +6,13 @@ describe('Break Line', () => {
 
   
 
-// Neste problema, você deverá exibir uma lista de 1 a 100, um em cada linha, com as seguintes exceções:
 
-// Números divisíveis por 3 deve aparecer como 'Fizz' ao invés do número;
-// Números divisíveis por 5 devem aparecer como 'Buzz' ao invés do número;
-// Números divisíveis por 3 e 5 devem aparecer como 'FizzBuzz' ao invés do número'.
+// Escreva um programa em que dado uma frase e a quantidade de colunas que podem ser exibidas na tela, faça a quebra de linhas sem quebrar as palavras.
+
+// Por exemplo, se passarmos a frase "Um pequeno jabuti xereta viu dez cegonhas felizes." e pedirmos para ela ser exibida em 20 colunas, teremos como resposta:
+
+// Um pequeno jabuti
+
+// xereta viu dez
+
+// cegonhas felizes.
