@@ -1,43 +1,33 @@
-class BreakLine {
-  frase: string;
-  colunas: number;
-  countQuebraLinha: number = 0;
+import { Validation } from "../protocols/validation";
 
-  constructor(frase:string, colunas:number){
-    this.frase = frase;
-    this.colunas = colunas;
-
-      this.validate();
-  }
-
-handle(){
-      let fraseFinal = '';
-      for(const frase of this.frase.split('')){
-        if(fraseFinal.length < this.colunas){
-              fraseFinal.concat(` ${frase}`)
- 
-           } else {
-                fraseFinal.concat('\n')
-                this.countQuebraLinha++;
-            }   
-        }
-
-        return fraseFinal;
-    }
-
-    validate() {
-        if (this.frase.length === 0) {
-            throw new Error('A frase deve conter ao menos um caractere')
-        }
-
-        if (this.colunas < 1) {
-            throw new Error('A quantidade de coluna deve ser maior do que zero')
-        }
-
-        if (!Number.isInteger(this.colunas)) {
-            throw new Error('A quantidade de coluna deve ser um inteiro')
-        }
-    }
+export interface BreakLine {
+    apply(frase:string, colunas:number): string
 }
 
-export { BreakLine }
+export class AddBreakLineToText implements BreakLine {
+    constructor (
+        private readonly validation: Validation
+    ) {}
+    
+    apply(frase: string, colunas: number): string {
+        this.validation.validate(frase, colunas)
+        if (frase.length <= colunas) {
+            return frase
+        }
+        //                            li
+        // 'Deve retornar a frase com\nquebra se a mesma conter o\nnúmero de caracteres maior\nque as colunas'
+
+        let lastIndex = 0
+        let result = frase.substring(0, index)
+        for (let index = 0; index < frase.length; index++) {
+            if (frase[index] === ' ') {
+                lastIndex = index
+            }
+            if (index === colunasCount) {
+                result[lastIndex] = '\n'
+            }
+        }
+
+        return result.join('')
+    }
+}
