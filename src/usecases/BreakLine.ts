@@ -14,18 +14,20 @@ export class AddBreakLineToText implements BreakLine {
         if (frase.length <= colunas) {
             return frase
         }
-        //                            li
-        // 'Deve retornar a frase com\nquebra se a mesma conter o\nnúmero de caracteres maior\nque as colunas'
 
-        let lastIndex = 0
-        let result = frase.substring(0, index)
+        let columnsCounter = 0
+        let lastBreakpoint = 0
+        let result = frase.split('')
         for (let index = 0; index < frase.length; index++) {
             if (frase[index] === ' ') {
-                lastIndex = index
+                lastBreakpoint = index
             }
-            if (index === colunasCount) {
-                result[lastIndex] = '\n'
+            if (columnsCounter === colunas) {
+                result[lastBreakpoint] = '\n'
+                columnsCounter = 0
+                index = lastBreakpoint
             }
+            columnsCounter++
         }
 
         return result.join('')

@@ -72,7 +72,16 @@ describe('AddBreakLineToText', () => {
     const expectedResult = 'Deve retornar a frase com\nquebra se a mesma conter o\nnúmero de caracteres maior\nque as colunas'
     const {sut} = makeSut()
     const result = sut.apply(frase, colunas)
-    expect(result).toEqual(expectedResult)
+    expect(result).toBe(expectedResult)
+  });
+  
+  test('Deve retornar a frase com quebra se a mesma conter o número de caracteres maior que as colunas', () => {
+    const frase = 'Um pequeno jabuti xereta viu dez cegonhas felizes.'
+    const colunas = 20
+    const expectedResult = 'Um pequeno jabuti\nxereta viu dez\ncegonhas felizes.'
+    const {sut} = makeSut()
+    const result = sut.apply(frase, colunas)
+    expect(result).toBe(expectedResult)
   });
 })
 
