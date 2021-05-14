@@ -1,41 +1,88 @@
-import { BreakLine } from "./BreakLine";
+import { AddBreakLineToText } from "./BreakLine";
+import {AddBreakLineToTextValidationSpy} from '../mocks/validation-mocks'
 
-describe('Break Line', () => {
-  let quebraDeLinhas;
-  let frasesComQuebraDeLinha;
+type SutTypes = {
+  sut: AddBreakLineToText
+  addBreakLineToTextValidationSpy: AddBreakLineToTextValidationSpy
+}
 
-  test('Verifica se a entrada esta correta', () => {
-    const frase = 'teste um dois tres';
-    const colunas = 20;
-    const quebraDeLinhas = new BreakLine(frase, colunas); 
-    expect(quebraDeLinhas).toBeInstanceOf(BreakLine);
+const makeSut = (): SutTypes => {
+  const addBreakLineToTextValidationSpy = new AddBreakLineToTextValidationSpy()
+  const sut = new AddBreakLineToText(addBreakLineToTextValidationSpy)
+  return {
+    sut,
+    addBreakLineToTextValidationSpy
+  }
+}
+
+const mockSutParams = () => ({
+  frase: '',
+  colunas: 20
+})
+
+describe('AddBreakLineToText', () => {
+  test('Deve chamar Validation com valores corretos', () => {
+    const { frase, colunas } = mockSutParams()
+    const {sut, addBreakLineToTextValidationSpy} = makeSut()
+    sut.apply(frase, colunas)
+    expect(addBreakLineToTextValidationSpy.frase).toEqual([frase])
+    expect(addBreakLineToTextValidationSpy.colunas).toEqual([colunas])
   });
 
-  test('Retorna erro com uma frase vazia', () => {
-    const frase = '';
-    const colunas = 20;
-    expect(() => {new BreakLine(frase, colunas)}).toThrow(new Error('A frase deve conter ao menos um caractere'));
+  test('Deve retornar Erro se Validation falhar', () => {
+    const { frase, colunas } = mockSutParams()
+    const {sut, addBreakLineToTextValidationSpy} = makeSut()
+    jest.spyOn(addBreakLineToTextValidationSpy, 'validate').mockImplementationOnce(() => { throw new Error() })
+    expect(() => { sut.apply(frase, colunas) }).toThrow() 
   });
 
-  test('Retorna erro quando colunas for menor que 1', () => {
-    const frase = 'teste um dois tres';
-    const colunas = 0;
-    expect(() => {new BreakLine(frase, colunas)}).toThrow(new Error('A quantidade de coluna deve ser maior do que zero'));
+  test('Deve chamar Validation apenas uma vez', () => {
+    const { frase, colunas } = mockSutParams()
+    const {sut, addBreakLineToTextValidationSpy} = makeSut()
+    sut.apply(frase, colunas)
+    expect(addBreakLineToTextValidationSpy.frase).toEqual([frase])
   });
 
-  test('Retorna erro quanto o numero de colunas nao for um inteiro', () => {
-    const frase = 'teste um dois tres';
-    const colunas = 12.2;
-    expect(() => {new BreakLine(frase, colunas)}).toThrow(new Error('A quantidade de coluna deve ser um inteiro'));
+  test('Deve chamar Validation apenas uma vez', () => {
+    const { frase, colunas } = mockSutParams()
+    const {sut, addBreakLineToTextValidationSpy} = makeSut()
+    sut.apply(frase, colunas)
+    expect(addBreakLineToTextValidationSpy.frase).toEqual([frase])
   });
 
-  //const getArray = new BreakLine('teste um dois tres', 4).handle().split('\n')
-
-  test.each([[`um cinco`, 10],[`frase um`, 8]]
-  )(`Valida se a frase %p contem menos que %p colunas`, (firstArg, expectedResult) => {
-    expect(firstArg.length).toBeLessThanOrEqual(expectedResult);
+  test('Deve retornar a frase sem quebra se a mesma conter o mesmo número de caracteres que as colunas', () => {
+    const frase = '123456789'
+    const colunas = 9
+    const {sut} = makeSut()
+    const result = sut.apply(frase, colunas)
+    expect(result).toEqual(frase)
   });
 
+  test('Deve retornar a frase sem quebra se a mesma conter o número de caracteres menor que as colunas', () => {
+    const frase = '123456'
+    const colunas = 9
+    const {sut} = makeSut()
+    const result = sut.apply(frase, colunas)
+    expect(result).toEqual(frase)
+  });
+
+  test('Deve retornar a frase com quebra se a mesma conter o número de caracteres maior que as colunas', () => {
+    const frase = 'Deve retornar a frase com quebra se a mesma conter o número de caracteres maior que as colunas'
+    const colunas = 30
+    const expectedResult = 'Deve retornar a frase com\nquebra se a mesma conter o\nnúmero de caracteres maior\nque as colunas'
+    const {sut} = makeSut()
+    const result = sut.apply(frase, colunas)
+    expect(result).toBe(expectedResult)
+  });
+  
+  test('Deve retornar a frase com quebra se a mesma conter o número de caracteres maior que as colunas', () => {
+    const frase = 'Um pequeno jabuti xereta viu dez cegonhas felizes.'
+    const colunas = 20
+    const expectedResult = 'Um pequeno jabuti\nxereta viu dez\ncegonhas felizes.'
+    const {sut} = makeSut()
+    const result = sut.apply(frase, colunas)
+    expect(result).toBe(expectedResult)
+  });
 })
 
 // Escreva um programa em que dado uma frase e a quantidade de colunas que podem ser exibidas na tela, faça a quebra de linhas sem quebrar as palavras.
