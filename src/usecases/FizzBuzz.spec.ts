@@ -1,12 +1,14 @@
 import { FizzBuzz } from './FizzBuzz'
 
+const verificaNumeroDivisivel = new FizzBuzz().verificaNumeroDivisivel; 
+
 describe('FizzBuzz Testes', () => {
   test('Verifica se a funcao verificaNumeroDivisivel retorna Fizz quando recebe 3', () => {
     
     const numDivisivel = 3;  
-    const fizz = FizzBuzz.verificaNumeroDivisivel(numDivisivel);
+    const fizz = verificaNumeroDivisivel(numDivisivel);
 
-    expect(fizz).toBe(0);
+    expect(fizz).toBe('Fizz');
   });
 })
 
