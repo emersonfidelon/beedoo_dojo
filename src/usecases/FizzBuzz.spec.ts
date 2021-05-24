@@ -16,6 +16,32 @@ describe('FizzBuzz Testes', () => {
   });
 })
 
+describe('FizzBuzz Testes', () => {
+  test('Verifica se a funcao verificaNumeroDivisivel retorna Buzz quando recebe um múltiplo de 5', () => {
+    
+    //Gera um número aleatório multiplo de 5 mas não multiplo de 3
+    let random = Math.floor(Math.random() * 10 + 1);
+      random = random % 3 === 0 ? random + 1 : random;
+    
+    const numDivisivel = 5 * random,
+      buzz = verificaNumeroDivisivel(numDivisivel);
+
+    expect(buzz).toBe('Buzz');
+  });
+})
+
+describe('FizzBuzz Testes', () => {
+  test('Verifica se a funcao verificaNumeroDivisivel retorna FizzBuzz quando recebe um múltiplo de 3 e 5', () => {
+    
+    //Gera um número aleatório multiplo de 3 e de 5
+    const numDivisivel = 3 * 5 * Math.floor(Math.random() * 10 + 1),
+      fizzBuzz = verificaNumeroDivisivel(numDivisivel);
+
+    expect(fizzBuzz).toBe('FizzBuzz');
+  });
+})
+
+
   
 
 // Neste problema, você deverá exibir uma lista de 1 a 100, um em cada linha, com as seguintes exceções:
