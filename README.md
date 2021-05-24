@@ -17,4 +17,4 @@ Valorizamos bastante a prática de TDD, Clean Architeture e design paterns
 
 - Fazer fork do repositório de sua escolha
 - Realizar as alterações em seu ambiente
-- Abrir um PR para análize da sua contribuição
+- Abrir um PR para análise da sua contribuição
