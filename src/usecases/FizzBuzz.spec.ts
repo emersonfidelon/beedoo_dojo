@@ -54,6 +54,23 @@ describe('FizzBuzz Testes', () => {
 })
   
 
+describe('FizzBuzz Testes', () => {
+  test('Retorna uma lista de 1 a 100 com as regras abaixo \n\tMúltiplos de 3 serão subtituidos por Fizz e múltiplos de 5 por Buzz', () => {
+    
+    const fizzBuzz = new FizzBuzz(), 
+      //Números de elementos contidos na lista
+      numberOfElements = 100,    
+
+      //Lista de inteiros maiores que 0
+      lista1a100 = Array.from(Array(numberOfElements+1).keys()).slice(1,numberOfElements+1);
+
+    let listaToPrint = lista1a100.map(element => fizzBuzz.verificaNumeroDivisivel(element));
+    
+    console.log(listaToPrint);
+  });
+})
+
+
 // Neste problema, você deverá exibir uma lista de 1 a 100, um em cada linha, com as seguintes exceções:
 
 // Números divisíveis por 3 deve aparecer como 'Fizz' ao invés do número;
