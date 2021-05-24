@@ -3,10 +3,14 @@ import { FizzBuzz } from './FizzBuzz'
 const verificaNumeroDivisivel = new FizzBuzz().verificaNumeroDivisivel; 
 
 describe('FizzBuzz Testes', () => {
-  test('Verifica se a funcao verificaNumeroDivisivel retorna Fizz quando recebe 3', () => {
+  test('Verifica se a funcao verificaNumeroDivisivel retorna Fizz quando recebe um múltiplo de 3', () => {
     
-    const numDivisivel = 3;  
-    const fizz = verificaNumeroDivisivel(numDivisivel);
+      //Gera um número aleatório multiplo de 3 mas não multiplo de 5
+      let random = Math.floor(Math.random() * 10 + 1);      
+        random = random % 5 === 0 ? random + 1 : random;
+    
+      const numDivisivel = 3 * random,
+        fizz = verificaNumeroDivisivel(numDivisivel);
 
     expect(fizz).toBe('Fizz');
   });
