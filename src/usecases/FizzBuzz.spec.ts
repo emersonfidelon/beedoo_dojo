@@ -45,7 +45,8 @@ describe('FizzBuzz Testes', () => {
   test('Verifica se a funcao verificaNumeroDivisivel retorna o  próprio número quando recebe um não múltiplo de 3 ou 5', () => {
     
     //Gera um número aleatório não multiplo de 3 ou de 5
-    const numDivisivel = (3 * 5 * Math.floor(Math.random() * 10 + 1)) + [1, 2, 4][Math.floor(Math.random() * 3)],
+    const numDivisivel = (3 * 5 * Math.floor(Math.random() * 10 + 1)) 
+      + [1, 2, 4][Math.floor(Math.random() * 3)],
       fizzBuzz = verificaNumeroDivisivel(numDivisivel);
 
     expect(fizzBuzz).toBe(numDivisivel);
