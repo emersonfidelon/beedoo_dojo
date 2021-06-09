@@ -1,5 +1,6 @@
 import {caixaEletronico} from './CaixaEletronico'
 import CurrencyFormatter from '../../../formatters/Currency';
+import { getNotasDisponiveis } from '../Controllers/Main';
 
 describe('Teste Caixa Eletronico Dojo', () => {
 
@@ -31,6 +32,12 @@ describe('Teste Caixa Eletronico Dojo', () => {
         const VALOR_SAQUE = 90;
         const sacado = caixaEletronico(VALOR_SAQUE);
         expect(sacado).toEqual(`Entregar 1 nota de ${CurrencyFormatter.format(50)} e 2 notas de ${CurrencyFormatter.format(20)}.`)
+    })
+
+    test('dado que valor passado é superior ao disponível retornar mensagem de saldo indisponível', () => {
+        const VALOR_SAQUE = getNotasDisponiveis().reduce((ac, item) => { return (ac + (item.nota * item.quantidade))}, 0) + 10;
+        const sacado = caixaEletronico(VALOR_SAQUE);
+        expect(sacado).toEqual(`Não há notas disponíveis para o valor solicitado!`)
     })
 
 })
