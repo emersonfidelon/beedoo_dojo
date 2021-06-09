@@ -1,3 +1,26 @@
+import CurrencyFormatter from "../formatters/Currency";
+
+interface IGrupoNotas {
+    item : number;
+    quantidade : number;
+}
+
+function agruparNotas(listaAgrupar: number[], listaAgrupadora: number[]) {
+   const retorno : IGrupoNotas[] = [];
+    listaAgrupadora.map( nota => {
+       const quantidade = listaAgrupar.filter(item => item === nota).length;
+       quantidade > 0 && retorno.push({item: nota, quantidade: quantidade}) 
+   })
+   return retorno;
+};
+
+function escreverTextoRetorno (listaNotas : IGrupoNotas[]) {
+    return 'Entregar' + listaNotas.map((nota , idx) => 
+    ` ${nota.quantidade} nota${nota.quantidade > 1 ? 's' : ''} de ${CurrencyFormatter.format(nota.item)}${idx === listaNotas.length-2 ? ' e' : idx === listaNotas.length-1 ? '.' : ',' }`)
+        .join('');
+}
+  
+
 export function caixaEletronico(valor_saque:number) {
 
     const notas_disponiveis = [100, 50, 20,10];
@@ -10,16 +33,20 @@ export function caixaEletronico(valor_saque:number) {
         return 'Ná há notas disponíveis para o valor informado.';
     }
 
-    let notas = []
+    const notas : number[] = [] ;
     notas_disponiveis.map(nota => {
-        while (valor_saque < nota) {
-            
-        }
-    })
+       while (valor_saque >= nota) {
+            notas.push(nota);
+            valor_saque -= nota;
+         }
+    });
 
-    return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
+    const notasAgrupadas = agruparNotas(notas, notas_disponiveis);
+    
+    return escreverTextoRetorno(notasAgrupadas); //'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
 }
 
+console.log(caixaEletronico(110));
 
 
 
