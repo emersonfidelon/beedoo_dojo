@@ -1,8 +1,11 @@
+import INotas from "../Interfaces/Interfaces.CaixaelEtronico";
+import { agruparNotas, escreverTextoRetorno, getNotasDisponiveis} from "../Controllers/Main";
+
 export function caixaEletronico(valor_saque:number) {
 
-    const notas_disponiveis = [100, 50, 20,10];
+    const notas_disponiveis : INotas[] = getNotasDisponiveis() ;
 
-    if(notas_disponiveis.includes(valor_saque)) {
+    if(notas_disponiveis.find(item => item.nota === valor_saque)) {
         return valor_saque;
     }
     
@@ -10,16 +13,25 @@ export function caixaEletronico(valor_saque:number) {
         return 'Ná há notas disponíveis para o valor informado.';
     }
 
-    let notas = []
-    notas_disponiveis.map(nota => {
-        while (valor_saque < nota) {
-            
-        }
-    })
+    const notas : Number[] = [] ;
+    notas_disponiveis.map(item => {
+       while (valor_saque >= item.nota && item.quantidade > 0) {
+            notas.push(item.nota);
+            valor_saque -= item.nota;
+            item.quantidade -=1;
+       }
+    });
 
-    return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
+    if (valor_saque === 0) { 
+        const notasAgrupadas = agruparNotas(notas, notas_disponiveis);
+        return escreverTextoRetorno(notasAgrupadas); //'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
+    } 
+    else {
+        return 'Não há notas disponíveis para o valor solicitado!';
+    }
 }
 
+//console.log(caixaEletronico(290));
 
 
 
