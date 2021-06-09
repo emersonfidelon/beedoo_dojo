@@ -1,5 +1,5 @@
 import {caixaEletronico} from './CaixaEletronico'
-import CurrencyFormatter from '../formatters/Currency';
+import CurrencyFormatter from '../../../formatters/Currency';
 
 describe('Teste Caixa Eletronico Dojo', () => {
 

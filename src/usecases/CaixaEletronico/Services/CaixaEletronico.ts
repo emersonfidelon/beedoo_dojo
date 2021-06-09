@@ -1,25 +1,6 @@
-import CurrencyFormatter from "../formatters/Currency";
-
-interface IGrupoNotas {
-    item : number;
-    quantidade : number;
-}
-
-function agruparNotas(listaAgrupar: number[], listaAgrupadora: number[]) {
-   const retorno : IGrupoNotas[] = [];
-    listaAgrupadora.map( nota => {
-       const quantidade = listaAgrupar.filter(item => item === nota).length;
-       quantidade > 0 && retorno.push({item: nota, quantidade: quantidade}) 
-   })
-   return retorno;
-};
-
-function escreverTextoRetorno (listaNotas : IGrupoNotas[]) {
-    return 'Entregar' + listaNotas.map((nota , idx) => 
-    ` ${nota.quantidade} nota${nota.quantidade > 1 ? 's' : ''} de ${CurrencyFormatter.format(nota.item)}${idx === listaNotas.length-2 ? ' e' : idx === listaNotas.length-1 ? '.' : ',' }`)
-        .join('');
-}
-  
+import CurrencyFormatter from "../../../formatters/Currency";
+import INotas from "../Interfaces/Interfaces.CaixaelEtronico";
+import { agruparNotas, escreverTextoRetorno} from "../Controllers/Main";
 
 export function caixaEletronico(valor_saque:number) {
 
