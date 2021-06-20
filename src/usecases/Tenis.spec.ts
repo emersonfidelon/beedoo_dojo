@@ -1,26 +1,52 @@
-import {Tenis} from './Tenis';
+import { Tenis } from './Tenis';
+
+const game = new Tenis();
 
 describe('', () => {
 
+    test('O jogo deve começar com o placar 0 - 0', () => {
+        expect(game.displayPlacar()).toEqual('0 - 0')
+    })
+
     test('Testa jogador 1 com zero pontos marca ponto deve ficar com 15', () => {
-        const jogador1 = 0;
-        const pontuacaoEsperada = 15;
-        const game = new Tenis();
-        
-        game.pontuar(jogador1);
-        
-        const [placar] = game.placar;
-        expect(pontuacaoEsperada).toEqual( placar)
-        
+        game.pontuar('jogador1');
+        expect(game.displayPlacar()).toEqual('15 - 0')
+    })
+
+    test('Deve retornar vantagem para o jogador', () => {
+        game.definirPlacar('40 - 40');
+        game.pontuar('jogador2');
+        expect(game.displayPlacar()).toEqual('ADVANTAGE JOGADOR 2');
     })
 
     test('Deve retornar empate se der empate (40 pontos)', () => {
-        const jogador1 = 0;
-        const jogador2 = 1;
-        const pontuacaoEsperada = 40;
-        const game = new Tenis();
-        game.pontuar(jogador1);     
-        expect(pontuacaoEsperada).toEqual('deuce');
+        game.definirPlacar('40 - 30');
+        game.pontuar('jogador2');
+        expect(game.displayPlacar()).toEqual('DEUCE');
+    })
+
+    test('Deve retornar o jogador 1 vencedor', () => {
+        game.definirPlacar('40 - 40');
+        game.pontuar('jogador1');
+        game.pontuar('jogador1');
+        expect(game.displayPlacar()).toEqual('JOGADOR 1 VENCEU');
+    })
+
+    test('Verifica se o placar é válido', () => {
+        game.definirPlacar('0 - 0');
+        expect(game.displayPlacar()).toEqual('0 - 0');
+
+        game.definirPlacar('15 - 0');
+        expect(game.displayPlacar()).toEqual('15 - 0');
+
+        game.definirPlacar('30 - 15');
+        expect(game.displayPlacar()).toEqual('30 - 15');
+
+        game.definirPlacar('40 - 30');
+        expect(game.displayPlacar()).toEqual('40 - 30');
+
+        game.definirPlacar('banana');
+        expect(game.displayPlacar()).toEqual('0 - 0');
     })
 
 })
@@ -35,4 +61,4 @@ describe('', () => {
 // Se ambos jogadores atingem 40 pontos, ocorre um empate (deuce);
 // Estando em empate, o jogador que ganhar a bola seguinte está em vantagem (advantage);
 // Se um jogador em vantagem ganha novamente a bola, ele vence o game;
-// Se um jogador estiver em vantagem e o outro ganhar a bola, volta a ocorrer o empta (deuce).
+// Se um jogador estiver em vantagem e o outro ganhar a bola, volta a ocorrer o empta (deuce) ADVANTAGE.
