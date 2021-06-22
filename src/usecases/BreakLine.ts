@@ -12,9 +12,9 @@ class BreakLine {
 
 handle(){
       let fraseFinal = '';
-      for(const frase of this.frase.split('')){
+      for(const letra of this.frase.split('')){
         if(fraseFinal.length < this.colunas){
-              fraseFinal.concat(` ${frase}`)
+              fraseFinal.concat(` ${letra}`)
  
            } else {
                 fraseFinal.concat('\n')
