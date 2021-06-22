@@ -29,6 +29,12 @@ describe('Break Line', () => {
     expect(() => {new BreakLine(frase, colunas)}).toThrow(new Error('A quantidade de coluna deve ser um inteiro'));
   });
 
+  test('Retorna erro quando a quantidade de colunas for menor do que alguma palavra da frase', () => {
+    const frase = 'Um pequeno jabuti xereta viu dez cegonhas felizes.';
+    const colunas = 7;
+    expect(() => {new BreakLine(frase, colunas)}).toThrow(new Error('A quantidade de colunas deve ser maior ou igual a quantidade de letras de cada palavra'));
+  });
+
   test('Número de linhas deve ser igual a 3', () => {
     const frase = 'Um pequeno jabuti xereta viu dez cegonhas felizes.';
     const colunas = 20;
@@ -51,6 +57,30 @@ describe('Break Line', () => {
     const breakLine = new BreakLine(frase, colunas)
     const linhas = breakLine.handle().split(/\r\n|\r|\n/)
     expect(linhas.length).toBe(2)
+  })
+
+  test('Número de linhas deve ser igual a 7', () => {
+    const frase = 'Um pequeno jabuti xereta viu dez cegonhas felizes.';
+    const colunas = 8;
+    const breakLine = new BreakLine(frase, colunas)
+    const linhas = breakLine.handle().split(/\r\n|\r|\n/)
+    expect(linhas.length).toBe(7)
+  })
+
+  test('Número de linhas deve ser igual a 5', () => {
+    const frase = 'Muita sorte para a nova etapa!';
+    const colunas = 6;
+    const breakLine = new BreakLine(frase, colunas)
+    const linhas = breakLine.handle().split(/\r\n|\r|\n/)
+    expect(linhas.length).toBe(5)
+  })
+
+  test('Número de linhas deve ser igual a 6', () => {
+    const frase = 'Gostaria de saber se deseja um café..';
+    const colunas = 8;
+    const breakLine = new BreakLine(frase, colunas)
+    const linhas = breakLine.handle().split(/\r\n|\r|\n/)
+    expect(linhas.length).toBe(6)
   })
   
   test.each([[`um cinco`, 10],[`frase um`, 8]]
