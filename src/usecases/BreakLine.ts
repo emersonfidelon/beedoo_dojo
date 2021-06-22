@@ -1,28 +1,28 @@
 class BreakLine {
-  frase: string;
-  colunas: number;
-  countQuebraLinha: number = 0;
+    frase: string;
+    colunas: number;
+    countQuebraLinha: number = 0;
 
-  constructor(frase:string, colunas:number){
-    this.frase = frase;
-    this.colunas = colunas;
+    constructor(frase: string, colunas: number) {
+        this.frase = frase;
+        this.colunas = colunas;
 
-      this.validate();
-  }
+        this.validate();
+    }
 
-handle(){
-      let fraseFinal = '';
-      for(const frase of this.frase.split('')){
-        if(fraseFinal.length < this.colunas){
-              fraseFinal.concat(` ${frase}`)
- 
-           } else {
-                fraseFinal.concat('\n')
-                this.countQuebraLinha++;
-            }   
+    handle(): string {
+        let arrString = Array.from(this.frase)
+        for (let i = this.colunas; i >= 0; i--) {
+            if (arrString[i] === ' ') {
+                arrString[i] = '\n'
+                if (i + this.colunas + 1 < arrString.length) {
+                    i += this.colunas + 2
+                } else {
+                    break;
+                }
+            }
         }
-
-        return fraseFinal;
+        return arrString.join('')
     }
 
     validate() {
@@ -36,6 +36,22 @@ handle(){
 
         if (!Number.isInteger(this.colunas)) {
             throw new Error('A quantidade de coluna deve ser um inteiro')
+        }
+
+        this.lançaErroSePalavraMaiorQueTamanhoColuna()
+    }
+
+    private lançaErroSePalavraMaiorQueTamanhoColuna(){
+        let palavras = this.frase.split(' ')
+        let maiorPalavra = 0
+        for(let i = 0; i < palavras.length; i++){
+            if(palavras[i].length > maiorPalavra){
+                maiorPalavra = palavras[i].length
+            }
+        }
+
+        if(maiorPalavra > this.colunas){
+            throw new Error('A quantidade de colunas deve ser maior ou igual a quantidade de letras de cada palavra')
         }
     }
 }
