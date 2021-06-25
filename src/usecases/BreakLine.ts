@@ -1,43 +1,41 @@
+import IBreakLineService from "../interfaces/IBreakLineService";
+import { IBreakLineProps } from "../models/IBreakLineProps";
+import BreakLineService from "../services/BreakLineService";
+import Validations from '../validations';
+
 class BreakLine {
-  frase: string;
-  colunas: number;
-  countQuebraLinha: number = 0;
+    private frase: string;
+    private colunas: number;
+    private countQuebraLinha: number;
+    private breakLineService: IBreakLineService;
 
-  constructor(frase:string, colunas:number){
-    this.frase = frase;
-    this.colunas = colunas;
+    constructor({ colunas, frase }: IBreakLineProps) {
+        this.breakLineService = new BreakLineService();
 
-      this.validate();
-  }
+        this.frase = frase;
+        this.colunas = colunas;
+        this.countQuebraLinha = 0;
 
-handle(){
-      let fraseFinal = '';
-      for(const frase of this.frase.split('')){
-        if(fraseFinal.length < this.colunas){
-              fraseFinal.concat(` ${frase}`)
- 
-           } else {
-                fraseFinal.concat('\n')
-                this.countQuebraLinha++;
-            }   
-        }
 
-        return fraseFinal;
+        this.validate();
     }
 
-    validate() {
-        if (this.frase.length === 0) {
-            throw new Error('A frase deve conter ao menos um caractere')
-        }
+    public handleWord(): string {
+        const resultado = this.breakLineService.execute({
+            colunas: this.colunas,
+            frase: this.frase
+        });
 
-        if (this.colunas < 1) {
-            throw new Error('A quantidade de coluna deve ser maior do que zero')
-        }
+        return resultado.trim();
+    }
 
-        if (!Number.isInteger(this.colunas)) {
-            throw new Error('A quantidade de coluna deve ser um inteiro')
-        }
+    private validate(): void {
+        const validation = new Validations();
+
+        validation.hasMinLen(this.frase, 1, 'A frase deve conter ao menos um caractere');
+        validation.isLowerThan(this.colunas, 1, 'A quantidade de coluna deve ser maior do que zero');
+        validation.isInteger(this.colunas, 'A quantidade de coluna deve ser um inteiro');
     }
 }
 
-export { BreakLine }
+export default BreakLine
