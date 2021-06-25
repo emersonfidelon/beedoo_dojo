@@ -6,10 +6,10 @@ type TypeObjetoNotas = {
 
 export function caixaEletronico(valor_saque:number) {
 
-    const notas_disponiveis:number[] = [100, 50, 20,10];
+    const notas_disponiveis:number[] = [100, 50, 20, 10];
 
     if(notas_disponiveis.includes(valor_saque)) {
-        return valor_saque;
+        return `Entregar 1 nota de R$${valor_saque},00.`
     }
     
     if(valor_saque % 10 !== 0){
