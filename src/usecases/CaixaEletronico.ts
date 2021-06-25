@@ -19,12 +19,34 @@ export function caixaEletronico(valor_saque:number) {
         }
     })  
 
-    const teste = {
-        notas,
-        valor_saque
-    }
+    // const frase:string = gerarFrase(notas)
 
-    return teste
+    return gerarObjetoNotas(notas)
+
+}
+
+
+function gerarObjetoNotas(notas:number[]){
+    let frase:string = 'Entregar '
+    let quantNotas = []
+
+    notas.forEach(nota => {
+        let temNota:boolean = false 
+        
+        quantNotas.forEach(obj => {
+            if(obj.nota === nota){
+                obj.quantidade++
+                temNota = true
+            } 
+        })
+
+        if(!temNota)
+            quantNotas.push({nota, quantidade: 1})
+        
+    });
+
+    return quantNotas
+    
 }
 
 // Desenvolva um programa que simule a entrega de notas quando um cliente efetuar um saque em um caixa
