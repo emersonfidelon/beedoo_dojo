@@ -1,42 +1,52 @@
-class BreakLine {
-  frase: string;
-  colunas: number;
-  countQuebraLinha: number = 0;
+import { IBreakLine } from "../interfaces/IBreakLine";
+import { IBreakLineProps } from "../models/IBreakLineProps";
 
-  constructor(frase:string, colunas:number){
-    this.frase = frase;
-    this.colunas = colunas;
+class BreakLine implements IBreakLine {
+    private frase: String;
+    private colunas: Number;
+    private countQuebraLinha: number;
 
-      this.validate();
-  }
+    constructor({ colunas, frase }: IBreakLineProps) {
+        this.frase = frase;
+        this.colunas = colunas;
+        this.countQuebraLinha = 0;
 
-handle(){
-      let fraseFinal = '';
-      for(const frase of this.frase.split('')){
-        if(fraseFinal.length < this.colunas){
-              fraseFinal.concat(` ${frase}`)
- 
-           } else {
-                fraseFinal.concat('\n')
-                this.countQuebraLinha++;
-            }   
-        }
-
-        return fraseFinal;
+        this.validate();
     }
 
-    validate() {
-        if (this.frase.length === 0) {
+    public handle(): string {
+        let resultado = '';
+        const palavras = this.frase.trim().split(' ');
+
+        let linha = '';
+        for (const palavra of palavras) {
+            if (linha.length + palavra.length < this.colunas) {
+                if (!linha)
+                    linha += palavra;
+                else
+                    linha += ' ' + palavra;
+            } else {
+                resultado += `${linha}\n`;
+                linha = palavra;
+            }
+        }
+
+        if (linha) {
+            resultado += linha;
+        }
+
+        return resultado.trim();
+    }
+
+    private validate(): void {
+        if (this.frase.length === 0)
             throw new Error('A frase deve conter ao menos um caractere')
-        }
 
-        if (this.colunas < 1) {
+        if (this.colunas < 1)
             throw new Error('A quantidade de coluna deve ser maior do que zero')
-        }
 
-        if (!Number.isInteger(this.colunas)) {
+        if (!Number.isInteger(this.colunas))
             throw new Error('A quantidade de coluna deve ser um inteiro')
-        }
     }
 }
 
