@@ -34,8 +34,18 @@ export function caixaEletronico(valor_saque:number) {
 
 
 function gerarFrase(objetoNotas:TypeObjetoNotas[]){
-    
-    return `${objetoNotas}`
+    let frase = `Entregar`
+
+    objetoNotas.forEach(nota => {
+        const index:number = objetoNotas.indexOf(nota)
+        const ultimaNota:boolean = (index === objetoNotas.length-1)
+        const primeiraNota:boolean = (index === 0)
+        const notaDoMeio:boolean = (!primeiraNota && !ultimaNota)
+
+        frase = frase + `${notaDoMeio && ','}${ultimaNota && ' e'} ${nota.quantidade} nota${nota.quantidade > 1 ? 's' : ''} de R$${nota.nota},00${ultimaNota && '.'}`
+    });
+
+    return frase
 }
 
 
