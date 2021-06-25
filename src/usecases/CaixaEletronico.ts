@@ -42,7 +42,7 @@ function gerarFrase(objetoNotas:TypeObjetoNotas[]){
         const primeiraNota:boolean = (index === 0)
         const notaDoMeio:boolean = (!primeiraNota && !ultimaNota)
 
-        frase = frase + `${notaDoMeio && ','}${ultimaNota && ' e'} ${nota.quantidade} nota${nota.quantidade > 1 ? 's' : ''} de R$${nota.nota},00${ultimaNota && '.'}`
+        frase = frase + `${notaDoMeio ? ',' : ''}${ultimaNota ? ' e': ''} ${nota.quantidade} nota${nota.quantidade > 1 ? 's' : ''} de R$${nota.nota},00${ultimaNota ? '.': ''}`
     });
 
     return frase
