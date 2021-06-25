@@ -1,3 +1,9 @@
+
+type TypeObjetoNotas = {
+    nota: number;
+    quantidade: number;
+}
+
 export function caixaEletronico(valor_saque:number) {
 
     const notas_disponiveis:number[] = [100, 50, 20,10];
@@ -19,10 +25,17 @@ export function caixaEletronico(valor_saque:number) {
         }
     })  
 
-    // const frase:string = gerarFrase(notas)
+    const objetoNotas:TypeObjetoNotas[] = gerarObjetoNotas(notas)
+    const frase:string = gerarFrase(objetoNotas)
 
-    return gerarObjetoNotas(notas)
+    return frase
 
+}
+
+
+function gerarFrase(objetoNotas:TypeObjetoNotas[]){
+    
+    return `${objetoNotas}`
 }
 
 
