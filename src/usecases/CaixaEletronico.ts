@@ -1,27 +1,76 @@
+
+type TypeObjetoNotas = {
+    nota: number;
+    quantidade: number;
+}
+
 export function caixaEletronico(valor_saque:number) {
 
-    const notas_disponiveis = [100, 50, 20,10];
+    const notas_disponiveis:number[] = [100, 50, 20, 10];
 
     if(notas_disponiveis.includes(valor_saque)) {
-        return valor_saque;
+        return `Entregar 1 nota de R$${valor_saque},00.`
     }
     
-    if(valor_saque % 10 !==0){
+    if(valor_saque % 10 !== 0){
         return 'Ná há notas disponíveis para o valor informado.';
     }
 
-    let notas = []
-    notas_disponiveis.map(nota => {
-        while (valor_saque < nota) {
-            
-        }
-    })
+    let notas:number[] = []
 
-    return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
+    notas_disponiveis.map(nota => {
+        while (valor_saque >= nota) {
+            valor_saque -= nota
+            notas.push(nota)
+        }
+    })  
+
+    const objetoNotas:TypeObjetoNotas[] = gerarObjetoNotas(notas)
+    const frase:string = gerarFrase(objetoNotas)
+
+    return frase
+
 }
 
 
+function gerarFrase(objetoNotas:TypeObjetoNotas[]){
+    let frase = `Entregar`
 
+    objetoNotas.forEach(nota => {
+        const index:number = objetoNotas.indexOf(nota)
+        const ultimaNota:boolean = (index === objetoNotas.length-1)
+        const primeiraNota:boolean = (index === 0)
+        const notaDoMeio:boolean = (!primeiraNota && !ultimaNota)
+
+        frase = frase + `${notaDoMeio ? ',' : ''}${ultimaNota ? ' e': ''} ${nota.quantidade} nota${nota.quantidade > 1 ? 's' : ''} de R$${nota.nota},00${ultimaNota ? '.': ''}`
+    });
+
+    return frase
+}
+
+
+function gerarObjetoNotas(notas:number[]){
+    let frase:string = 'Entregar '
+    let quantNotas = []
+
+    notas.forEach(nota => {
+        let temNota:boolean = false 
+        
+        quantNotas.forEach(obj => {
+            if(obj.nota === nota){
+                obj.quantidade++
+                temNota = true
+            } 
+        })
+
+        if(!temNota)
+            quantNotas.push({nota, quantidade: 1})
+        
+    });
+
+    return quantNotas
+    
+}
 
 // Desenvolva um programa que simule a entrega de notas quando um cliente efetuar um saque em um caixa
 // eletrônico. Os requisitos básicos são os seguintes:
