@@ -1,27 +1,21 @@
-export function caixaEletronico(valor_saque:number) {
+export function caixaEletronico(valor_saque: number) {
+  const notas_disponiveis = [100, 50, 20, 10];
 
-    const notas_disponiveis = [100, 50, 20,10];
+  if (notas_disponiveis.includes(valor_saque)) {
+    return valor_saque;
+  }
 
-    if(notas_disponiveis.includes(valor_saque)) {
-        return valor_saque;
-    }
-    
-    if(valor_saque % 10 !==0){
-        return 'Ná há notas disponíveis para o valor informado.';
-    }
+  if (valor_saque % 10 !== 0) {
+    return "Ná há notas disponíveis para o valor informado.";
+  }
 
-    let notas = []
-    notas_disponiveis.map(nota => {
-        while (valor_saque < nota) {
-            
-        }
-    })
+  let notas = [];
+  notas_disponiveis.map((nota) => {
+    while (valor_saque < nota) {}
+  });
 
-    return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
+  return "Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.";
 }
-
-
-
 
 // Desenvolva um programa que simule a entrega de notas quando um cliente efetuar um saque em um caixa
 // eletrônico. Os requisitos básicos são os seguintes:
