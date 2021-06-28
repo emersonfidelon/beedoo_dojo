@@ -32,6 +32,30 @@ class CashOutService {
 
       return accum;
     }, {});
+
+    function toFixedWithComma(number: string, decimals: number) {
+      return Number(number).toFixed(decimals).replace(".", ",");
+    }
+
+    const finalResult = Object.keys(notes)
+      .reverse()
+      .map((note, index) => {
+        let result = "";
+
+        result = `Entregar ${notes[note]} nota de R$${toFixedWithComma(
+          note,
+          2
+        )}`;
+
+        if (index > 0) {
+          result = `e ${notes[note]} nota de R$ ${toFixedWithComma(note, 2)}`;
+        }
+
+        return result;
+      })
+      .join(" ");
+
+    return finalResult + ".";
   }
 }
 
