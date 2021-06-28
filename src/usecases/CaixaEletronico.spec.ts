@@ -23,7 +23,7 @@ describe('Teste Caixa Eletronico Dojo', () => {
   test('dado que valor passado 110 deve retornar 1 nota de 100 e uma de 10', () => {
     const VALOR_SAQUE = 110;
     const sacado = caixaEletronico(VALOR_SAQUE);
-    expect(sacado).toEqual('Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.')
+    expect(sacado).toEqual('Entregar 1 nota de R$100,00 e 1 nota de R$10,00')
   })
 
 })
