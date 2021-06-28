@@ -1,7 +1,7 @@
 import CashOutService from "./CashOutService";
 
 describe("CashOutService", () => {
-  test("ao sacar 10 deve retornar 10", () => {
+  test("When withdrawing, 10 must return 10", () => {
     const cashOutService = new CashOutService();
 
     const WITHDRAWAL_VALUE = 10;
@@ -9,14 +9,14 @@ describe("CashOutService", () => {
     expect(drawn).toEqual(10);
   });
 
-  test("verifica se valor passado é multiplo de 10", () => {
+  test("Check if value entered is multiple of 10", () => {
     const cashOutService = new CashOutService();
     const WITHDRAWAL_VALUE = 15;
     const drawn = cashOutService.execute(WITHDRAWAL_VALUE);
-    expect(drawn).toEqual("Ná há notas disponíveis para o valor informado.");
+    expect(drawn).toEqual("Não há notas disponíveis para o valor informado.");
   });
 
-  test("dado que valor passado 110 deve retornar 1 nota de 100 e uma de 10", () => {
+  test("Given that the entered value 110 should return 1 note of 100 and one of 10", () => {
     const cashOutService = new CashOutService();
 
     const WITHDRAWAL_VALUE = 110;
