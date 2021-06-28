@@ -1,23 +1,40 @@
-export function caixaEletronico(valor_saque:number) {
+export function caixaEletronico(valor_saque: number) {
 
-    const notas_disponiveis = [100, 50, 20,10];
+  const notas_disponiveis: number[] = [100, 50, 20, 10]
 
-    if(notas_disponiveis.includes(valor_saque)) {
-        return valor_saque;
+  if (valor_saque <= 0) {
+    return 'Valor inválido'
+  }
+
+  if (notas_disponiveis.includes(valor_saque)) {
+    return `Entregar 1 nota de R$${valor_saque},00`
+  }
+
+  if (valor_saque % 10 !== 0) {
+    return 'Ná há notas disponíveis para o valor informado.';
+  }
+
+  let notas: number[] = []
+  notas_disponiveis.map(nota => {
+    while (valor_saque >= nota) {
+      valor_saque -= nota
+      notas.push(nota)
     }
-    
-    if(valor_saque % 10 !==0){
-        return 'Ná há notas disponíveis para o valor informado.';
-    }
+  })
 
-    let notas = []
-    notas_disponiveis.map(nota => {
-        while (valor_saque < nota) {
-            
-        }
+  let msg = ''
+  const saque = [...new Set(notas)]
+    .map(nota => {
+      return { 'nota': nota, 'qtd': notas.filter(n => n == nota).length }
+    })
+    .forEach((nota, i, self) => {
+      const comma = i === 0 ? '' : self.length == i + 1 ? ' e ' : ', '
+      const notaQtd = nota.qtd > 1 ? 'notas' : 'nota'
+
+      msg += `${comma}${nota.qtd} ${notaQtd} de R$${nota.nota},00`
     })
 
-    return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
+  return `Entregar ${msg}`;
 }
 
 
