@@ -1,6 +1,15 @@
+type INotes = {
+  [key: string]: number;
+};
+
 class CashOutService {
   execute(withdrawalValue: number) {
     const availableNotes = [100, 50, 20, 10];
+    let currentWithdrawalValue = withdrawalValue;
+
+    if (!withdrawalValue) {
+      throw new Error("Withdrawal value must be valid.");
+    }
 
     if (availableNotes.includes(withdrawalValue)) {
       return withdrawalValue;
@@ -10,29 +19,20 @@ class CashOutService {
       return "Não há notas disponíveis para o valor informado.";
     }
 
-    const notes = availableNotes.map((note) => {
-      while (withdrawalValue < note) {
-        return note;
-      }
-    });
+    const notes = availableNotes.reduce((accum: INotes, note: number) => {
+      while (currentWithdrawalValue >= note) {
+        currentWithdrawalValue -= note;
 
-    return "Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.";
+        if (accum[note]) {
+          accum[note] = accum[note] + 1;
+        } else {
+          accum[note] = 1;
+        }
+      }
+
+      return accum;
+    }, {});
   }
 }
 
 export default CashOutService;
-
-// Desenvolva um programa que simule a entrega de notas quando um cliente efetuar um saque em um caixa
-// eletrônico. Os requisitos básicos são os seguintes:
-// ● Entregar o menor número de notas;
-// ● É possível sacar o valor solicitado com as notas disponíveis;
-// ● Saldo do cliente infinito;
-// ● Quantidade de notas infinito (pode-se colocar um valor finito de cédulas para aumentar a dificuldade do
-// problema);
-
-// Notas disponíveis de R$ 100,00; R$ 50,00; R$ 20,00 e R$ 10,00
-
-// Exemplos:
-// Valor do Saque: R$ 30,00 – Resultado Esperado: Entregar 1 nota de R$20,00 e 1 nota de R$ 10,00.
-// Valor do Saque: R$ 80,00 – Resultado Esperado: Entregar 1 nota de R$50,00 1 nota de R$ 20,00 e 1 nota de R$
-// 10,00
