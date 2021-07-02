@@ -14,7 +14,7 @@ describe('JokenPo', () => {
   
     test('não é uma jogada inválida', () => {
       const jogador1 = 'asdf';
-      const jogador2 = 'Pedra';
+      const jogador2 = jogador1;
       const resultado = jokenPoJuiz.verificar(jogador1, jogador2);
       expect(resultado).toEqual('Jogada Inválida');
     })
@@ -24,9 +24,7 @@ describe('JokenPo', () => {
       const jogador2 = 'Tesoura';
       const resultado1 = jokenPoJuiz.verificar(jogador1, jogador2);
       expect(resultado1).toEqual('Pedra ganhou');
-      const jogador3 = 'Tesoura';
-      const jogador4 = 'Pedra';
-      const resultado2 = jokenPoJuiz.verificar(jogador3, jogador4);
+      const resultado2 = jokenPoJuiz.verificar(jogador2, jogador1);
       expect(resultado2).toEqual('Pedra ganhou');
     })
 
@@ -35,9 +33,7 @@ describe('JokenPo', () => {
       const jogador2 = 'Tesoura';
       const resultado1 = jokenPoJuiz.verificar(jogador1, jogador2);
       expect(resultado1).toEqual('Tesoura ganhou');
-      const jogador3 = 'Tesoura';
-      const jogador4 = 'Papel';
-      const resultado2 = jokenPoJuiz.verificar(jogador3, jogador4);
+      const resultado2 = jokenPoJuiz.verificar(jogador2, jogador1);
       expect(resultado2).toEqual('Tesoura ganhou');
     })
 
@@ -46,9 +42,7 @@ describe('JokenPo', () => {
       const jogador2 = 'Papel';
       const resultado1 = jokenPoJuiz.verificar(jogador1, jogador2);
       expect(resultado1).toEqual('Papel ganhou');
-      const jogador3 = 'Papel';
-      const jogador4 = 'Pedra';
-      const resultado2 = jokenPoJuiz.verificar(jogador3, jogador4);
+      const resultado2 = jokenPoJuiz.verificar(jogador2, jogador1);
       expect(resultado2).toEqual('Papel ganhou');
     })
 
