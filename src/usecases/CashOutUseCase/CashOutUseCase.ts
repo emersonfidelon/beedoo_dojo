@@ -1,4 +1,4 @@
-interface IWithdrawNoteResult {
+interface IWithdrawNote {
   note: string
   quantity: number
 }
@@ -27,28 +27,31 @@ class CashOutUseCase {
 
     const sortedNotes = this.availableNotes.sort((a, b) => b - a)
 
-    const availableNotesObjectArray = sortedNotes.map((note)=>({note:'R$ '+note,value:Number(note)}))
-    
     let remaingValue = valueToWithdraw
 
-    const withDrawnNotes = sortedNotes.reverse().map((note, index)=>{
-      let quantity = 0
- 
-     while(remaingValue >= note){
-         remaingValue -= note
-         quantity++
-     }
-     return{value:note, quantity}
- 
-   })
+    const withdrawnNotes = sortedNotes.map((note, index) => {
 
-   
+      let quantity = 0
+
+      while (remaingValue >= note) {
+        remaingValue -= note
+        quantity++
+      }
+      return { value: note, quantity }
+
+    })
+
+    console.log(withdrawnNotes)
+
+
 
   }
 
   private generateWithdrawString() {
 
-    const withdrawNoteResult: IWithdrawNoteResult[] = []
+    const stringStart = 'Entregar'
+
+    const withdrawNotes: IWithdrawNote[] = []
 
   }
 
