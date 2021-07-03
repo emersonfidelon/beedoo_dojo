@@ -9,7 +9,7 @@ describe("CashOutUseCase", () => {
         const valueToWithDraw = 10;
         const withdrawActionResult = cashOutUseCase.execute(valueToWithDraw);
 
-        expect(withdrawActionResult).toEqual(10);
+        expect(withdrawActionResult).toEqual('Entregar 1 nota de R$ 10,00.');
     });
 
     test('verifica se valor passado é multiplo de 10', () => {
