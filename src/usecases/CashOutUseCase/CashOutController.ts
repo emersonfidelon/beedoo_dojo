@@ -16,7 +16,7 @@ class CashOutController {
 
     }catch(error){
 
-      return response.status(200).send({errorMessage:error.message})
+      return response.status(400).send({errorMessage:error.message})
     }
 
 
