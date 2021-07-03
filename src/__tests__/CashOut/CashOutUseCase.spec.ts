@@ -4,7 +4,7 @@ describe("CashOutUseCase", () => {
 
    const cashOutUseCase = new CashOutUseCase()
 
-    test('Should return 10 when withdrawing 10.', () => {
+    test('Deve retornar 10 quando estiver sacando R$ 10.', () => {
 
         const valueToWithdraw = 10;
         const withdrawActionResult = cashOutUseCase.execute(valueToWithdraw);
