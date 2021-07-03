@@ -1,50 +1,55 @@
-interface IWithdrawNoteResult{
-  note:string
-  quantity:number
+interface IWithdrawNoteResult {
+  note: string
+  quantity: number
 }
 class CashOutUseCase {
 
-  constructor(private availableNotes:number[] = [100, 50, 20, 10]){}
+  constructor(private availableNotes: number[] = [100, 50, 20, 10]) { }
 
-  public execute(valueToWithDraw: number) {
-    
-    if (this.availableNotes.includes(valueToWithDraw)) {
+  public execute(valueToWithdraw: number) {
 
-      return`Entregar 1 nota de R$ ${valueToWithDraw},00.`;
+    if (this.availableNotes.includes(valueToWithdraw)) {
+
+      return `Entregar 1 nota de R$ ${valueToWithdraw},00.`;
     }
-    if (valueToWithDraw % 10 !== 0) {
+    if (valueToWithdraw % 10 !== 0) {
       return "Não há notas disponíveis para o valor informado.";
     }
 
+
+    this.processValueToWithdraw(valueToWithdraw)
 
     return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.'
 
   }
 
-  private processValueToWithDraw(valueToWithDraw){
+  private processValueToWithdraw(valueToWithdraw) {
 
+    const sortedNotes = this.availableNotes.sort((a, b) => b - a)
 
-    const sortedNotes  = this.availableNotes.sort((a,b)=>b-a)
-
-
-
-
-    sortedNotes.forEach((availableNote)=>{
-      if(availableNote < valueToWithDraw){
-
-        `e ${ valueToWithDraw / availableNote} de R$ ${ availableNote+',00'}`
-
-      }
-        
-      })
-        
+    const availableNotesObjectArray = sortedNotes.map((note)=>({note:'R$ '+note,value:Number(note)}))
     
+    let remaingValue = valueToWithdraw
+
+    const withDrawnNotes = sortedNotes.reverse().map((note, index)=>{
+      let quantity = 0
+ 
+     while(remaingValue >= note){
+         remaingValue -= note
+         quantity++
+     }
+     return{value:note, quantity}
+ 
+   })
+
+   
+
   }
 
-  private generateWithdrawStrin(){
+  private generateWithdrawString() {
 
     const withdrawNoteResult: IWithdrawNoteResult[] = []
-    
+
   }
 
 }
