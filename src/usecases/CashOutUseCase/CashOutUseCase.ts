@@ -18,9 +18,9 @@ class CashOutUseCase {
 
     const withdrawnNotes = this.processNotesToWithdraw(valueToWithdraw)
 
-    this.generateWithdrawString(withdrawnNotes)
+    const resultString = this.generateWithdrawString(withdrawnNotes)
     
-    return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.'
+    return  resultString
   }
 
   private processNotesToWithdraw(valueToWithdraw:number) {
@@ -37,8 +37,9 @@ class CashOutUseCase {
         remaingValue -= note
         quantity++
       }
+      
      return { note, quantity }
-
+     
     })
 
    return withdrawnNotes.filter((withdrawnNote)=>withdrawnNote.quantity)
@@ -48,7 +49,7 @@ class CashOutUseCase {
 
     const stringStart = `Entregar`
 
-    let resultString = `${stringStart} ${withdrawnNotes[0].quantity} de R$ ${String(withdrawnNotes[0].note)},00`
+    let resultString = `${stringStart} ${withdrawnNotes[0].quantity} nota${withdrawnNotes[0].quantity>1?'s':''} de R$ ${String(withdrawnNotes[0].note)},00`
 
     if(withdrawnNotes.length === 1 ){
       return resultString
@@ -61,7 +62,7 @@ class CashOutUseCase {
        ...remainingWithdrawnNotes.map((withdrawnNote)=>
        `e ${withdrawnNote.quantity} nota${withdrawnNote.quantity>1?'s':''} de R$ ${String(withdrawnNote.note)},00`)]
 
-    resultString = resultStringArray.join(' ')
+    resultString = resultStringArray.join(' ')+'.'
 
     return resultString
 

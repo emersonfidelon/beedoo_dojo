@@ -1,0 +1,19 @@
+
+class CashOutController {
+
+
+
+  handle(){
+
+
+  }
+
+
+
+
+
+
+
+
+
+}
