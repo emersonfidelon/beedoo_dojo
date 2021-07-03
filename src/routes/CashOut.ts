@@ -1,8 +1,9 @@
-import express from "express";
+import {Router}from "express";
 
 import { cashOutController } from "../usecases/CashOutUseCase";
-const router = express.Router()
 
-router.post('/',cashOutController.handle)
+const cashOutRouter = Router()
 
-export default router
+cashOutRouter.post('/',cashOutController.handle)
+
+export default cashOutRouter

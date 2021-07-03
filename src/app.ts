@@ -1,14 +1,10 @@
 import express from 'express'
-
+import morgan from 'morgan'
 import cashOutRoute from './routes/CashOut'
-
 
 const app = express()
 
- app.use(cashOutRoute)
 
- app.listen(3000,()=>{
-   console.log('My application is running')
- })
+app.use(cashOutRoute)
 
 export { app }
