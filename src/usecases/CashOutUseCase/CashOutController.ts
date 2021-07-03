@@ -4,7 +4,7 @@ class CashOutController {
 
   constructor(private cashOutUseCase:CashOutUseCase){}
 
-  handle(request:Request, response:Response){
+  handle = (request:Request, response:Response)=>{
 
     const {valueToWithdraw} = request.body
 
