@@ -61,9 +61,9 @@ class CashOutUseCase {
        ...remainingWithdrawnNotes.map((withdrawnNote)=>
        `e ${withdrawnNote.quantity} nota${withdrawnNote.quantity>1?'s':''} de R$ ${String(withdrawnNote.note)},00`)]
 
+    resultString = resultStringArray.join(' ')
 
-
-       console.log('STRING FINAL ', resultStringArray.join(" "))
+    return resultString
 
   }
 
