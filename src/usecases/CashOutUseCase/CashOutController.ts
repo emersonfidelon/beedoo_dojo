@@ -9,8 +9,9 @@ class CashOutController {
     const {valueToWithdraw} = request.body
 
     const resultString = this.cashOutUseCase.execute(valueToWithdraw)
+    console.log('RESULT STRING ', resultString)
 
-    return response.json({resultString})
+    return response.send({resultString})
 
   }
 }
