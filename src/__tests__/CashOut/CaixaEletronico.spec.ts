@@ -1,4 +1,4 @@
-import {caixaEletronico} from './CaixaEletronico'
+import {caixaEletronico} from '../../usecases/CashOutUseCase/CaixaEletronico'
 
 describe('Teste Caixa Eletronico Dojo', () => {
 
