@@ -8,10 +8,17 @@ class CashOutController {
 
     const {valueToWithdraw} = request.body
 
-    const resultString = this.cashOutUseCase.execute(valueToWithdraw)
-    console.log('RESULT STRING ', resultString)
+    try{
+      const resultString = this.cashOutUseCase.execute(valueToWithdraw)
 
-    return response.send({resultString})
+      return response.status(200).send({resultString})
+
+
+    }catch(error){
+
+      return response.status(200).send({errorMessage:error.message})
+    }
+
 
   }
 }
