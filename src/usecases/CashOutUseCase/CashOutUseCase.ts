@@ -1,5 +1,5 @@
-interface IWithdrawNote {
-  note: string
+interface IWithdrawnNote {
+  note: number
   quantity: number
 }
 class CashOutUseCase {
@@ -16,18 +16,14 @@ class CashOutUseCase {
       return "Não há notas disponíveis para o valor informado.";
     }
 
-
-
-
-    
     const withdrawnNotes = this.processNotesToWithdraw(valueToWithdraw)
 
-    console.log('NOTAS SACADAS ', withdrawnNotes)
+    this.generateWithdrawString(withdrawnNotes)
     
     return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.'
   }
 
-  private processNotesToWithdraw(valueToWithdraw) {
+  private processNotesToWithdraw(valueToWithdraw:number) {
 
     const sortedNotes = this.availableNotes.sort((a, b) => b - a)
 
@@ -41,22 +37,37 @@ class CashOutUseCase {
         remaingValue -= note
         quantity++
       }
-     return { value: note, quantity }
+     return { note, quantity }
 
     })
 
    return withdrawnNotes.filter((withdrawnNote)=>withdrawnNote.quantity)
   }
 
-  private generateWithdrawString() {
+  private generateWithdrawString(withdrawnNotes:IWithdrawnNote[]) {
 
-    const stringStart = 'Entregar'
+    const stringStart = `Entregar`
+
+    let resultString = `${stringStart} ${withdrawnNotes[0].quantity} de R$ ${String(withdrawnNotes[0].note)},00`
+
+    if(withdrawnNotes.length === 1 ){
+      return resultString
+    }
+
+    const remainingWithdrawnNotes = withdrawnNotes.slice(1, withdrawnNotes.length)
+
+
+    const resultStringArray: string[] = [resultString,
+       ...remainingWithdrawnNotes.map((withdrawnNote)=>
+       `e ${withdrawnNote.quantity} nota${withdrawnNote.quantity>1?'s':''} de R$ ${String(withdrawnNote.note)},00`)]
 
 
 
-    const withdrawNotes: IWithdrawNote[] = []
+       console.log('STRING FINAL ', resultStringArray.join(" "))
 
   }
+
+
 
 }
 

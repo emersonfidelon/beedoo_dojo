@@ -27,4 +27,11 @@ describe("CashOutUseCase", () => {
         
         expect(withdrawActionResult).toEqual('Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.')
     })
+
+    test('dado que valor passado 110 deve retornar 1 nota de 100 e uma de 10', () => {
+
+        const valueToWithDraw = 410;
+        const withdrawActionResult = cashOutUseCase.execute(valueToWithDraw);
+        
+    })
 });
