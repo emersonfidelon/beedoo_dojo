@@ -17,13 +17,17 @@ class CashOutUseCase {
     }
 
 
-    this.processValueToWithdraw(valueToWithdraw)
 
+
+    
+    const withdrawnNotes = this.processNotesToWithdraw(valueToWithdraw)
+
+    console.log('NOTAS SACADAS ', withdrawnNotes)
+    
     return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.'
-
   }
 
-  private processValueToWithdraw(valueToWithdraw) {
+  private processNotesToWithdraw(valueToWithdraw) {
 
     const sortedNotes = this.availableNotes.sort((a, b) => b - a)
 
@@ -37,19 +41,18 @@ class CashOutUseCase {
         remaingValue -= note
         quantity++
       }
-      return { value: note, quantity }
+     return { value: note, quantity }
 
     })
 
-    console.log(withdrawnNotes)
-
-
-
+   return withdrawnNotes.filter((withdrawnNote)=>withdrawnNote.quantity)
   }
 
   private generateWithdrawString() {
 
     const stringStart = 'Entregar'
+
+
 
     const withdrawNotes: IWithdrawNote[] = []
 
