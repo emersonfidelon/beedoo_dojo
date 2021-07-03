@@ -5,6 +5,7 @@ import cashOutRoute from './routes/CashOut'
 const app = express()
 
 app.use(express.json())
+app.use(morgan('tiny'))
 app.use(cashOutRoute)
 
 export { app }
