@@ -13,7 +13,7 @@ class CashOutUseCase {
       return `Entregar 1 nota de R$ ${valueToWithdraw},00.`;
     }
     if (valueToWithdraw % 10 !== 0) {
-     return ('Não há notas disponíveis para o valor informado.');
+     throw  Error('Não há notas disponíveis para o valor informado.');
       ;
        
     }

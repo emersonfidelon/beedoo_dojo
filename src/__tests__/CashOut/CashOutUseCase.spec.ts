@@ -15,9 +15,8 @@ describe("CashOutUseCase", () => {
     test('verifica se valor passado é multiplo de 10', () => {
 
         const valueToWithdraw = 15;
-        const withdrawActionResult = cashOutUseCase.execute(valueToWithdraw);
 
-        expect(withdrawActionResult).toEqual('Não há notas disponíveis para o valor informado.')
+        expect(()=>cashOutUseCase.execute(valueToWithdraw)).toThrow('Não há notas disponíveis para o valor informado.')
     })
 
     test('dado que valor passado 110 deve retornar 1 notas de 100 e uma de 10', () => {
