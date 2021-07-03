@@ -1,18 +1,20 @@
-export function caixaEletronico(valor_saque:number) {
+export function cashOut(valueToWithdraw:number) {
 
-    const notas_disponiveis = [100, 50, 20,10];
+    const AVAILABLE_NOTES = [100, 50, 20,10];
 
-    if(notas_disponiveis.includes(valor_saque)) {
-        return valor_saque;
+    if(AVAILABLE_NOTES.includes(valueToWithdraw)) {
+        return valueToWithdraw;
     }
     
-    if(valor_saque % 10 !==0){
+    if(valueToWithdraw % 10 !==0){
         return 'Ná há notas disponíveis para o valor informado.';
     }
 
-    let notas = []
-    notas_disponiveis.map(nota => {
-        while (valor_saque < nota) {
+    let notes = []
+
+    AVAILABLE_NOTES.map(note => {
+
+        while (valueToWithdraw < note) {
             
         }
     })
