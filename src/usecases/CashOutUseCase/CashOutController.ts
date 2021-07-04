@@ -13,12 +13,10 @@ class CashOutController {
 
       return response.status(200).send({resultString})
 
-
     }catch(error){
 
       return response.status(400).send({errorMessage:error.message})
     }
-
 
   }
 }

@@ -69,9 +69,6 @@ class CashOutUseCase {
     return resultString
 
   }
-
-
-
 }
 
 export default CashOutUseCase;
