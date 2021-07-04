@@ -8,14 +8,8 @@ class CashOutUseCase {
 
   public execute(valueToWithdraw: number) {
 
-    if (this.availableNotes.includes(valueToWithdraw)) {
-
-      return `Entregar 1 nota de R$ ${valueToWithdraw},00.`;
-    }
     if (valueToWithdraw % 10 !== 0) {
      throw  Error('Não há notas disponíveis para o valor informado.');
-      ;
-       
     }
 
     const withdrawnNotes = this.processNotesToWithdraw(valueToWithdraw)
@@ -54,7 +48,7 @@ class CashOutUseCase {
     let resultString = `${ stringStart } ${ withdrawnNotes[0].quantity } nota${withdrawnNotes[0].quantity > 1 ?'s': '' } de R$ ${ String(withdrawnNotes[0].note) },00`
 
     if(withdrawnNotes.length === 1 ){
-      return resultString
+      return resultString+'.'
     }
 
     const remainingWithdrawnNotes = withdrawnNotes.slice(1, withdrawnNotes.length)
