@@ -59,10 +59,10 @@ class CashOutUseCase {
 
     const remainingWithdrawnNotes = withdrawnNotes.slice(1, withdrawnNotes.length)
 
+    const remaingString = remainingWithdrawnNotes.map((withdrawnNote)=>
+   `e ${withdrawnNote.quantity} nota${withdrawnNote.quantity>1?'s':''} de R$ ${String(withdrawnNote.note)},00`)
 
-    const resultStringArray: string[] = [resultString,
-       ...remainingWithdrawnNotes.map((withdrawnNote)=>
-       `e ${withdrawnNote.quantity} nota${withdrawnNote.quantity>1?'s':''} de R$ ${String(withdrawnNote.note)},00`)]
+    const resultStringArray: string[] = [resultString, ...remaingString]
 
     resultString = resultStringArray.join(' ')+'.'
 
