@@ -25,11 +25,11 @@ git clone https://github.com/emersonfidelon/beedoo_dojo.git
 npm i
 ```
 
-## 📋 Usage (incomplete)
+## 📋 Usage
 
-
-~~npm start~~
-
+```sh
+npm start
+```
 
 ## 🔍 Tests
 ```
@@ -39,7 +39,7 @@ npm test
 ## ☑️ ToDo
 - [x] ~~Diminuir complexidade das funções na classe JokenPoJuiz~~
 - [ ] Refatorar o teste
-- [ ] Interface de utilização com o index.ts
+- [x] ~~Interface de utilização com o index.ts~~
 
 ## 🏷️ Topics (tags)
 ##### #TDD #DDD #CleanArchiteture #DesignPaterns #CleanCode #CodeReview
