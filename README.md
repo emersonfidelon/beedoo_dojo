@@ -37,9 +37,9 @@ npm test
 ```
 
 ## ☑️ ToDo
-- [x] ~~Diminuir complexidade das funções na classe JokenPoJuiz~~
-- [ ] Refatorar o teste
-- [x] ~~Interface de utilização com o index.ts~~
+- [X] ~~Diminuir complexidade das funções na classe JokenPoJuiz~~
+- [X] ~~Refatorar o teste~~
+- [X] ~~Interface de utilização com o index.ts~~
 
 ## 🏷️ Topics (tags)
 ##### #TDD #DDD #CleanArchiteture #DesignPaterns #CleanCode #CodeReview
