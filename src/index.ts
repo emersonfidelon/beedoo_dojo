@@ -1,7 +1,25 @@
-import { FizzBuzz } from "./usecases/FizzBuzz";
+import JokenPoJuiz from './usecases/JokenPoJuiz'
+var readlineSync = require('readline-sync');
 
-const fizzBuzz = new FizzBuzz()
+const jokenPoJuiz = new JokenPoJuiz;
 
-for(let number=1; number<=100; number++) {
-    console.log(fizzBuzz.verificaNumeroDivisivel(number))
+function capitalize(str){
+    return str[0].toUpperCase()+str.slice(1).toLowerCase()
 }
+
+function jogada(str){
+    return readlineSync.question(`Jogada do ${str} : `, { hideEchoBack: true });
+}
+
+function Jogo() {
+    let result: string = '';
+    var jogador1 = jogada('Jogador1');
+    var jogador2 = jogada('Jogador2');
+
+  if (jogador1 && jogador2)
+  result = jokenPoJuiz.verificar(capitalize(jogador1), capitalize(jogador2));
+
+  return result;
+}
+
+console.log(Jogo()); 
