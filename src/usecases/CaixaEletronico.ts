@@ -1,23 +1,44 @@
-export function caixaEletronico(valor_saque:number) {
+/**
+ * Calcula o menor número de notas que correspondem ao valor do saque do usuário.
+ * Runtime: O(n)
+ * @param {number} valor_saque
+ * @returns {string}
+ */
+export function caixaEletronico (valorSaque: number) {
 
-    const notas_disponiveis = [100, 50, 20,10];
+    const notasDisponiveis = [100, 50, 20, 10];
 
-    if(notas_disponiveis.includes(valor_saque)) {
-        return valor_saque;
-    }
-    
-    if(valor_saque % 10 !==0){
+    // Checa se o valor solicitado é múltiplo de 10
+    if (valorSaque % 10 !== 0)
         return 'Ná há notas disponíveis para o valor informado.';
+
+    // Checa se o valor solicitado é inteiro positivo
+    if (valorSaque < 0)
+        return 'Valor inválido.';
+
+    if (notasDisponiveis.includes(valorSaque))
+        return `Entregar 1 nota de R$ ${valorSaque.toFixed(2).replace('.', ',')}.`;
+
+    let valorRestante: number = valorSaque;
+    let resposta: string = 'Entregar';
+    // Neste caso preferi usar um for ao invés do map para podermos sair do laço quando o objetivo for atingido
+    for (let nota of notasDisponiveis) {
+        let quantidadeDeNotas: number = Math.floor(valorRestante / nota);
+        if (quantidadeDeNotas > 0) {
+            valorRestante -= (nota * quantidadeDeNotas);
+            resposta +=
+                (resposta.length > 8 ? ' e ' : ' ') +
+                `${quantidadeDeNotas} nota` +
+                (quantidadeDeNotas > 1 ? 's' : '') +
+                ` de R$ ${nota.toFixed(2).replace('.',',')}`;
+        }
+        if (valorRestante === 0)
+            break;
     }
 
-    let notas = []
-    notas_disponiveis.map(nota => {
-        while (valor_saque < nota) {
-            
-        }
-    })
+    resposta += '.';
 
-    return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
+    return resposta;
 }
 
 
