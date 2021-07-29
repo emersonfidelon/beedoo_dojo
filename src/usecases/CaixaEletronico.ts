@@ -1,27 +1,34 @@
-export function caixaEletronico(valor_saque:number) {
-
-    const notas_disponiveis = [100, 50, 20,10];
-
-    if(notas_disponiveis.includes(valor_saque)) {
-        return valor_saque;
-    }
-    
-    if(valor_saque % 10 !==0){
-        return 'Ná há notas disponíveis para o valor informado.';
-    }
-
-    let notas = []
-    notas_disponiveis.map(nota => {
-        while (valor_saque < nota) {
+const notas_disponiveis = [100, 50, 20,10]; 
+class CaixaEletronico {
+    sacar(valor_saque:number){
+        return new Promise<number | string>((resolve, reject) => {
+            if(notas_disponiveis.includes(valor_saque)) {
+                resolve(valor_saque)
+            }
             
-        }
-    })
+            if(valor_saque % 10 !== 0){
+                resolve('Ná há notas disponíveis para o valor informado.')
+            }
 
-    return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
+            let notas_para_entregar = notas_disponiveis.reduce((acumulador, nota) => {
+                let qtd_atual_nota = 0;
+                while(valor_saque >= nota){
+                    valor_saque = valor_saque - nota
+                    qtd_atual_nota++;
+                }
+                if(qtd_atual_nota > 1){
+                    return `${acumulador}${qtd_atual_nota} notas de R$${nota},00 - `;
+                }else if(qtd_atual_nota == 1){
+                    return `${acumulador}1 nota de R$${nota},00 - `;
+                }
+                return acumulador;
+            }, 'Entregar ')
+            resolve(notas_para_entregar.slice(0, -3))
+        })
+    }
 }
 
-
-
+export { CaixaEletronico }
 
 // Desenvolva um programa que simule a entrega de notas quando um cliente efetuar um saque em um caixa
 // eletrônico. Os requisitos básicos são os seguintes:
