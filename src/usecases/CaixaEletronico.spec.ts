@@ -1,5 +1,3 @@
-'strict'
-
 import {CaixaEletronico} from './CaixaEletronico'
 
 let caixa_eletronico: CaixaEletronico;

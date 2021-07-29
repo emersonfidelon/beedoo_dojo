@@ -9,31 +9,21 @@ class CaixaEletronico {
             if(valor_saque % 10 !== 0){
                 resolve('Ná há notas disponíveis para o valor informado.')
             }
-            let notas = []
-            notas_disponiveis.map(nota => {
-                while (valor_saque >= nota) {
-                    let nota_ja_existe = notas.findIndex(nota_para_sacar => {
-                        return nota_para_sacar.valor === nota;
-                    })
-                    if(nota_ja_existe >= 0){
-                        notas[nota_ja_existe] = {
-                            valor: nota,
-                            qtd: notas[nota_ja_existe].qtd + 1
-                        }
-                    }else{
-                        notas.push({valor: nota, qtd: 1});
-                    }
+
+            let notas_para_entregar = notas_disponiveis.reduce((acumulador, nota) => {
+                let qtd_atual_nota = 0;
+                while(valor_saque >= nota){
                     valor_saque = valor_saque - nota
+                    qtd_atual_nota++;
                 }
-            })           
-            let notas_para_disponibilizar = notas.map(nota => {
-                if(nota.qtd > 1){
-                    return `${nota.qtd} notas de R$${nota.valor},00`
+                if(qtd_atual_nota > 1){
+                    return `${acumulador}${qtd_atual_nota} notas de R$${nota},00 - `;
+                }else if(qtd_atual_nota == 1){
+                    return `${acumulador}1 nota de R$${nota},00 - `;
                 }
-                return `1 nota de R$${nota.valor},00`
-            });
-            let msg_notas_para_entregar = `Entregar ${notas_para_disponibilizar.join(' - ')}`
-            resolve(msg_notas_para_entregar)
+                return acumulador;
+            }, 'Entregar ')
+            resolve(notas_para_entregar.slice(0, -3))
         })
     }
 }
