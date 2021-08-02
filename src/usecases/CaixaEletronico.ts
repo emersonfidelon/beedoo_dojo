@@ -1,3 +1,22 @@
+function imprimirTexto(notas) {
+    let texto = 'Entregar ';
+
+    notas.forEach((nota, index) => {
+        if (index !== 0) {
+            texto += 'e ';
+        }
+
+        const notaOuNotas = nota.quantidade > 1 ? 'notas' : 'nota';
+        const valorStr = nota.valor.toFixed(2).replace('.',',');
+
+        texto += `${nota.quantidade} ${notaOuNotas} de R$${valorStr}`
+    })
+
+    texto += `.`
+
+    return texto;
+}
+
 export function caixaEletronico(valor_saque:number) {
 
     const notas_disponiveis = [100, 50, 20,10];
@@ -11,15 +30,41 @@ export function caixaEletronico(valor_saque:number) {
     }
 
     let notas = []
+
+    /**
+     * nota = {quantidade: 10, valor: 10}
+     */
+
     notas_disponiveis.map(nota => {
         while (valor_saque < nota) {
-            
+
+            if (valor_saque % nota === 0) {
+                const quantidade = valor_saque / nota;
+
+                const objNota = {
+                    quantidade,
+                    valor: nota
+                }
+
+                notas.push(objNota);
+                valor_saque -= quantidade * nota;
+            }
+
         }
     })
+
+    return imprimirTexto(notas);
 
     return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
 }
 
+
+/**
+ * ex: sacar 280 reais
+ *
+ *
+ *
+ */
 
 
 
