@@ -20,9 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1365144a-1a0d-4085-9473-98ae2465613a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/usecases/CaixaEletronico.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/usecases/CaixaEletronico.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/usecases/CaixaEletronico.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/usecases/CaixaEletronico.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +53,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1627869458940</updated>
-      <workItem from="1627869460136" duration="2425000" />
+      <workItem from="1627869460136" duration="2740000" />
     </task>
     <servers />
   </component>

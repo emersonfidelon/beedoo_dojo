@@ -45,20 +45,23 @@ export function caixaEletronico(valor_saque:number) {
             }
 
             notas.push(objNota);
+
             valor_saque -= quantidade * nota;
         }
     })
 
-    console.log(notas)
-
     return imprimirTexto(notas);
-    //
-    // return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
 }
 
 
-console.log(caixaEletronico(200));
-console.log(caixaEletronico(230));
+// console.log(caixaEletronico(20));
+// console.log(caixaEletronico(35));
+// console.log(caixaEletronico(37));
+// console.log(caixaEletronico(200));
+// console.log(caixaEletronico(235));
+// console.log(caixaEletronico(2280));
+// console.log(caixaEletronico(2290));
+// console.log(caixaEletronico(230));
 
 
 // Desenvolva um programa que simule a entrega de notas quando um cliente efetuar um saque em um caixa
