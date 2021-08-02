@@ -35,9 +35,8 @@ export function caixaEletronico(valor_saque:number) {
      * nota = {quantidade: 10, valor: 10}
      */
 
-    notas_disponiveis.map(nota => {
-        while (valor_saque < nota) {
-
+    notas_disponiveis.forEach(nota => {
+        while (valor_saque >= nota) {
             if (valor_saque % nota === 0) {
                 const quantidade = valor_saque / nota;
 
@@ -49,22 +48,18 @@ export function caixaEletronico(valor_saque:number) {
                 notas.push(objNota);
                 valor_saque -= quantidade * nota;
             }
-
         }
     })
 
-    return imprimirTexto(notas);
+    console.log(notas)
 
-    return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
+    return imprimirTexto(notas);
+    //
+    // return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
 }
 
 
-/**
- * ex: sacar 280 reais
- *
- *
- *
- */
+console.log(caixaEletronico(200));
 
 
 
