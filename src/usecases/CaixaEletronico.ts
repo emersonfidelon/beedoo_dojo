@@ -53,17 +53,6 @@ export function caixaEletronico(valor_saque:number) {
     return imprimirTexto(notas);
 }
 
-
-// console.log(caixaEletronico(20));
-// console.log(caixaEletronico(35));
-// console.log(caixaEletronico(37));
-// console.log(caixaEletronico(200));
-// console.log(caixaEletronico(235));
-// console.log(caixaEletronico(2280));
-// console.log(caixaEletronico(2290));
-// console.log(caixaEletronico(230));
-
-
 // Desenvolva um programa que simule a entrega de notas quando um cliente efetuar um saque em um caixa
 // eletrônico. Os requisitos básicos são os seguintes:
 // ● Entregar o menor número de notas;
