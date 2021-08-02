@@ -3,7 +3,7 @@ function imprimirTexto(notas) {
 
     notas.forEach((nota, index) => {
         if (index !== 0) {
-            texto += 'e ';
+            texto += ' e ';
         }
 
         const notaOuNotas = nota.quantidade > 1 ? 'notas' : 'nota';
@@ -37,17 +37,15 @@ export function caixaEletronico(valor_saque:number) {
 
     notas_disponiveis.forEach(nota => {
         while (valor_saque >= nota) {
-            if (valor_saque % nota === 0) {
-                const quantidade = valor_saque / nota;
+            const quantidade = Math.floor(valor_saque / nota);
 
-                const objNota = {
-                    quantidade,
-                    valor: nota
-                }
-
-                notas.push(objNota);
-                valor_saque -= quantidade * nota;
+            const objNota = {
+                quantidade,
+                valor: nota
             }
+
+            notas.push(objNota);
+            valor_saque -= quantidade * nota;
         }
     })
 
@@ -60,7 +58,7 @@ export function caixaEletronico(valor_saque:number) {
 
 
 console.log(caixaEletronico(200));
-
+console.log(caixaEletronico(230));
 
 
 // Desenvolva um programa que simule a entrega de notas quando um cliente efetuar um saque em um caixa
