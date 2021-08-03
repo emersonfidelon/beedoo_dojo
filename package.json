@@ -1,5 +1,5 @@
 {
-  "name": "17032021",
+  "name": "LineBacker",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -10,7 +10,6 @@
     "@types/jest": "^26.0.21",
     "ts-node": "^9.1.1"
   },
-  "dependencies": {},
   "scripts": {
     "test": "jest --watch"
   }
