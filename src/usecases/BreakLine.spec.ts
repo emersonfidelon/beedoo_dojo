@@ -1,7 +1,7 @@
 import { BreakLine } from "./BreakLine"
 import {
   wordIsToShort,
-  columnsShouldBeNumber,
+  columnsShouldBeInteger,
   columnsNumberLessThanZero,
 } from "./BreakLinesMessages"
 
@@ -17,29 +17,26 @@ import {
  */
 
 describe(BreakLine.name, () => {
-  test('Verifica se a entrada esta correta', () => {
-    const phase = 'teste um dois tres'
-    const columns = 20
-    const breakLine = new BreakLine(phase, columns)
-    expect(breakLine).toBeInstanceOf(BreakLine)
+  test('Verifica se é realmente uma função', () => {
+    expect(BreakLine).toBeInstanceOf(Function)
   })
 
   test('Retorna erro com uma phase vazia', () => {
     const phase = ''
     const columns = 20
-    expect(() => { new BreakLine(phase, columns) }).toThrow(new Error(wordIsToShort))
+    expect(() => { BreakLine({ phase, columns }) }).toThrow(Error(wordIsToShort))
   })
 
   test('Retorna erro quando columns for menor que 1', () => {
     const phase = 'teste um dois tres'
     const columns = 0
-    expect(() => { new BreakLine(phase, columns) }).toThrow(new Error(columnsNumberLessThanZero))
+    expect(() => { BreakLine({ phase, columns }) }).toThrow(Error(columnsNumberLessThanZero))
   })
 
   test('Retorna erro quanto o numero de columns não for um inteiro', () => {
     const phase = 'teste um dois tres'
     const columns = 12.2
-    expect(() => { new BreakLine(phase, columns) }).toThrow(new Error(columnsShouldBeNumber))
+    expect(() => { BreakLine({ phase, columns }) }).toThrow(Error(columnsShouldBeInteger))
   })
 
   test.each([[`um cinco`, 10], [`phase um`, 8]]
