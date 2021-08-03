@@ -5,30 +5,30 @@ import {
 } from "./BreakLinesMessages"
 
 export class BreakLine {
-  frase: string
-  colunas: number
-  countQuebraLinha = 0
+  phase: string
+  columns: number
+  countBreakRow = 0
 
-  constructor(frase: string, colunas: number) {
-    this.frase = frase
-    this.colunas = colunas
+  constructor(phase: string, columns: number) {
+    this.phase = phase
+    this.columns = columns
     this.check()
   }
 
   run() {
-    return this.frase.split('').forEach(frase => {
-      const fraseFinal = ''
-      if (fraseFinal.length > this.colunas) {
-        fraseFinal.concat('\n')
-        this.countQuebraLinha++
+    return this.phase.split('').forEach(phase => {
+      const phaseFinal = ''
+      if (phaseFinal.length > this.columns) {
+        phaseFinal.concat('\n')
+        this.countBreakRow++
       }
-      fraseFinal.concat(` ${frase}`)
+      phaseFinal.concat(` ${phase}`)
     })
   }
 
   check() {
-    if (!this.frase.length) throw new Error(wordIsToShort)
-    if (this.colunas < 1) throw new Error(columnsNumberLessThanZero)
-    if (!Number.isInteger(this.colunas)) throw new Error(columnsShouldBeNumber)
+    if (!this.phase.length) throw new Error(wordIsToShort)
+    if (this.columns < 1) throw new Error(columnsNumberLessThanZero)
+    if (!Number.isInteger(this.columns)) throw new Error(columnsShouldBeNumber)
   }
 }
