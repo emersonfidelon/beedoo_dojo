@@ -14,5 +14,7 @@
   },
   "scripts": {
     "test": "jest --passWithNoTests --watch"
-  }
+  },
+  "repository": "https://github.com/ercioalendre/beedoo_dojo.git",
+  "author": "Ercio Alendre <ercio.alendre@gmail.com>"
 }
