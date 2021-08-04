@@ -1,7 +1,5 @@
-import { FizzBuzz } from "./usecases/FizzBuzz";
+import JokenPo from "./usecases/JokenPoJuiz";
 
-const fizzBuzz = new FizzBuzz()
+const jokenPo = new JokenPo()
 
-for(let number=1; number<=100; number++) {
-    console.log(fizzBuzz.verificaNumeroDivisivel(number))
-}
+console.log(jokenPo.verificar("Pedra", "Papel"))
