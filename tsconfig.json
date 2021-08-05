@@ -55,6 +55,9 @@
       "@shared/*": [
         "src/shared/*"
       ],
+      "@MainRoutes": [
+        "src/shared/http/routes/index.ts"
+      ],
       "@middlewares/*": [
         "src/shared/http/middlewares/*"
       ]
