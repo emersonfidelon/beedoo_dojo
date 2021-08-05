@@ -66,6 +66,15 @@
       ],
       "@UserRepository": [
         "src/modules/users/typeorm/repositories/User.repository.ts"
+      ],
+      "@UsersServices/*": [
+        "src/modules/users/services/*"
+      ],
+      "@UsersRoutes": [
+        "src/modules/users/routes/users.routes.ts"
+      ],
+      "@UsersController": [
+        "src/modules/users/controllers/UsersController.ts"
       ]
     },                                 /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // "rootDirs": [],                              /* List of root folders whose combined content represents the structure of the project at runtime. */
