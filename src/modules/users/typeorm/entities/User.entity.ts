@@ -22,6 +22,8 @@ class User {
   account_number: number;
   @Column()
   account_digit: number;
+  @Column()
+  balance: number;
   @CreateDateColumn({ type: 'datetime' })
   created_at: Date;
   @UpdateDateColumn({ type: 'datetime' })
