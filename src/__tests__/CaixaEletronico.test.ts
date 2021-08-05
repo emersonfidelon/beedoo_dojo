@@ -1,4 +1,4 @@
-import {caixaEletronico} from './CaixaEletronico'
+const { caixaEletronico } = require('../usecases/CaixaEletronico');
 
 describe('Teste Caixa Eletronico Dojo', () => {
 

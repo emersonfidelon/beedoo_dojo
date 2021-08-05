@@ -1,4 +1,4 @@
-{
+export default {
   "type": "sqlite",
   "database": "./src/database/db.sqlite",
   "synchronize": true,

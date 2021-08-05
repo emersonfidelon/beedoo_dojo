@@ -1,6 +1,6 @@
 export function caixaEletronico(valor_saque:number) {
 
-    const notas_disponiveis = [100, 50, 20,10];
+    const notas_disponiveis = [100, 50, 20, 10];
 
     if(notas_disponiveis.includes(valor_saque)) {
         return valor_saque;
