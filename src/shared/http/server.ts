@@ -1,3 +1,5 @@
+import "reflect-metadata";
+import "@shared/typeorm";
 import app from "./app";
 
 const listenPort = process.env.PORT || 3000;
