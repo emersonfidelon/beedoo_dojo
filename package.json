@@ -1,7 +1,7 @@
 {
   "name": "17032021",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/shared/http/server.ts",
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.13",
@@ -16,6 +16,7 @@
     "express": "^4.17.1"
   },
   "scripts": {
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
     "test": "jest --passWithNoTests --watch"
   },
   "repository": "https://github.com/ercioalendre/beedoo_dojo.git",
