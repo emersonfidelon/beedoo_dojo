@@ -30,8 +30,6 @@ export default function isAuthenticated(
       email: sub,
     };
 
-    console.log(req.user)
-
     return next();
   } catch {
     throw new AppError("Invalid token.", 401);
