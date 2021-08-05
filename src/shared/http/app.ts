@@ -1,6 +1,9 @@
+import "reflect-metadata";
+import "@shared/typeorm";
+import "express-async-errors";
+import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import routes from "@MainRoutes";
-import "express-async-errors";
 import AppError from "@shared/errors/AppError";
 
 class AppController{
@@ -9,9 +12,19 @@ class AppController{
         this.express = express();
         this.middlewares();
         this.routes();
+        this.errorHandler();
     }
 
     middlewares() {
+        this.express.use(express.json());
+        this.express.use(cors());
+    }
+
+    routes() {
+        this.express.use(routes);
+    }
+
+    errorHandler() {
         this.express.use((error: Error, req: Request, res: Response, next: NextFunction) => {
             if (error instanceof AppError) {
                 return res.status(error.statusCode).json({
@@ -25,10 +38,6 @@ class AppController{
                 message: "Internal server error",
             });
         });
-    }
-
-    routes() {
-        this.express.use(routes);
     }
 }
 
