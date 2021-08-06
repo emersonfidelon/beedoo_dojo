@@ -1,23 +1,22 @@
 export function caixaEletronico(valor_saque:number) {
 
     const notas_disponiveis = [100, 50, 20,10];
-
+    let notas = [];
     if(notas_disponiveis.includes(valor_saque)) {
-        return valor_saque;
+        return 1;
     }
     
     if(valor_saque % 10 !==0){
         return 'Ná há notas disponíveis para o valor informado.';
     }
 
-    let notas = []
+    
     notas_disponiveis.map(nota => {
-        while (valor_saque < nota) {
-            
-        }
-    })
+        notas.push((valor_saque / nota) | 0);
+        valor_saque= valor_saque%nota;
+     })
 
-    return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
+    return notas;
 }
 
 
