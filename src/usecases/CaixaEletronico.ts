@@ -6,31 +6,44 @@ export function caixaEletronico(valor_saque: number) {
   
   if (valor_saque % 10 !== 0) return 'Ná há notas disponíveis para o valor informado.';
   
-  let notas = {};
+  let notas = [];
   
   notas_disponiveis.map(nota => {
-    let count = 1;
 
-    while (valor_saque >= nota) {
-      notas[nota] = count;
+    if (nota > valor_saque) return;
+  
+    const quantidadeDeNotas = Math.floor(valor_saque / nota);
+    
+    valor_saque = valor_saque % nota;
 
-      valor_saque -= nota;
-      count++;
-    }
+    notas.push({
+      valor: nota,
+      quantidade: quantidadeDeNotas
+    });
+    
   });
 
-  let notasParaEntregar = Object.keys(notas)
-  .reverse()
-  .map((nota, index, arr) => {
-    if (!arr[index + 1]) return `e ${notas[nota]} nota de R$ ${nota},00.`;
-  
-    return `${notas[nota]} nota de R$${nota},00 `;
-  }).join('');
+  const retornoDoCaixa = notasParaEntregar(notas);
 
-  return `Entregar ${notasParaEntregar}`;
+  return retornoDoCaixa;
 }
 
+interface NotasParaSaque {
+  valor: number;
+  quantidade: number;
+}
 
+function notasParaEntregar(notas: NotasParaSaque[]) {
+  
+  const valores = notas.map((nota, index, arr) => {
+
+    if (!arr[index + 1]) return `e ${nota.quantidade} nota de R$ ${nota.valor},00.`;
+  
+    return `${nota.quantidade} nota de R$${nota.valor},00 `;
+  }).join('');
+
+  return `Entregar ${valores}`;
+}
 
 
 // Desenvolva um programa que simule a entrega de notas quando um cliente efetuar um saque em um caixa
