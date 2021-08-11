@@ -5,7 +5,7 @@ describe('Teste Caixa Eletronico Dojo', () => {
     test('ao sacar 10 deve retornar 10', () => {
         const VALOR_SAQUE = 10;
         const sacado = caixaEletronico(VALOR_SAQUE);
-        expect(sacado).toEqual(1);
+        expect(sacado).toEqual('Entregar 1 nota de:10 ');
     });
 
     test('verifica se valor passado é multiplo de 10', () => {
@@ -18,7 +18,7 @@ describe('Teste Caixa Eletronico Dojo', () => {
         const VALOR_SAQUE = 110;
         const sacado = caixaEletronico(VALOR_SAQUE);
         console.log(sacado)
-        expect(sacado).toEqual('Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.')
+        expect(sacado).toEqual('Entregar 1 nota de:100 1 nota de:10')
     })
 
 })
