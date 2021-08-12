@@ -1,5 +1,5 @@
-import { VerificarNotas as verificarNotas } from './VeriricarNotas';
-import { EscreverFrase as escreverFrase } from './EscreverFrase';
+import { verificarNotas } from './VerificarNotas';
+import { escreverFrase } from './EscreverFrase';
 
 export function caixaEletronico(valor_saque:number) {
 

@@ -1,4 +1,4 @@
-export function VerificarNotas(notas_disponiveis: number[], valor_saque:number): any[] {
+export function verificarNotas(notas_disponiveis: number[], valor_saque:number): any[] {
   const notas = [];
 
   notas_disponiveis.map((nota, index) => {

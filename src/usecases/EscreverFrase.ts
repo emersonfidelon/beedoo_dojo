@@ -1,4 +1,4 @@
-export function EscreverFrase(notas: any[] ): string {
+export function escreverFrase(notas: any[] ): string {
 
     let frase = "Entregar";
 
