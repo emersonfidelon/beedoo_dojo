@@ -1,3 +1,6 @@
+import { VerificarNotas as verificarNotas } from './VeriricarNotas';
+import { EscreverFrase as escreverFrase } from './EscreverFrase';
+
 export function caixaEletronico(valor_saque:number) {
 
     const notas_disponiveis = [100, 50, 20,10];
@@ -10,16 +13,12 @@ export function caixaEletronico(valor_saque:number) {
         return 'Ná há notas disponíveis para o valor informado.';
     }
 
-    let notas = []
-    notas_disponiveis.map(nota => {
-        while (valor_saque < nota) {
-            
-        }
-    })
+    const notas = verificarNotas(notas_disponiveis, valor_saque);
 
-    return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
+    const frase = escreverFrase(notas);
+
+    return frase;
 }
-
 
 
 
