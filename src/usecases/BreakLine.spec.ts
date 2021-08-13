@@ -14,7 +14,7 @@ describe('Break Line', () => {
   test('Retorna erro com uma frase vazia', () => {
     const frase = '';
     const colunas = 20;
-    expect(() => {new BreakLine(frase, colunas)}).toThrow(new Error('A frase deve conter ao menos um caractere'));
+    expect(() => {new BreakLine(frase, colunas)}).toThrow(new Error('A frase deve conter ao menos um carácter'));
   });
 
   test('Retorna erro quando colunas for menor que 1', () => {

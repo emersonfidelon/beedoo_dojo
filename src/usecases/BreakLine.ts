@@ -1,33 +1,35 @@
 class BreakLine {
-  frase: string;
-  colunas: number;
-  countQuebraLinha: number = 0;
+    frase: string;
+    colunas: number;
+    countQuebraLinha: number = 0;
 
-  constructor(frase:string, colunas:number){
-    this.frase = frase;
-    this.colunas = colunas;
+    constructor(frase:string, colunas:number){
+        this.frase = frase;
+        this.colunas = colunas;
 
-      this.validate();
-  }
+        this.validate();
+    }
 
-handle(){
-      let fraseFinal = '';
-      for(const frase of this.frase.split('')){
-        if(fraseFinal.length < this.colunas){
-              fraseFinal.concat(` ${frase}`)
- 
-           } else {
-                fraseFinal.concat('\n')
+    handle(){
+        let fraseFinal = '';
+        let fraseAux = '';
+        for(const palavra of this.frase.split(' ')){
+            if(fraseAux.length + palavra.length < this.colunas){
+                fraseAux = fraseAux.concat(` ${palavra}`);
+                fraseFinal = fraseFinal.concat(` ${palavra}`);
+            } 
+            else {
+                fraseAux = '\n'+palavra;
+                fraseFinal = fraseFinal.concat(fraseAux);
                 this.countQuebraLinha++;
-            }   
+            } 
         }
-
         return fraseFinal;
     }
 
     validate() {
         if (this.frase.length === 0) {
-            throw new Error('A frase deve conter ao menos um caractere')
+            throw new Error('A frase deve conter ao menos um carácter')
         }
 
         if (this.colunas < 1) {
