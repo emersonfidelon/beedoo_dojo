@@ -1,0 +1,1 @@
+type JogadaValida = 'Pedra' | 'Papel' | 'Tesoura'

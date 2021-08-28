@@ -1,5 +1,5 @@
 export default class JokenPoJuiz {
-  constructor(private readonly jogadasValidas: Array<string>) { }
+  constructor(private readonly jogadasValidas: Array<JogadaValida>) { }
 
   private readonly jogadasGanhadoras = {
     'PedraTesoura': 'Pedra ganhou',
