@@ -15,6 +15,7 @@ describe('JokenPo', () => {
     test('não é uma jogada inválida', () => {
       const jogador1 = 'asdf';
       const jogador2 = 'Pedra';
+      //@ts-ignore
       const resultado = jokenPoJuiz.verificar(jogador1, jogador2);
       expect(resultado).toEqual('Jogada Inválida');
     })
