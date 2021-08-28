@@ -13,11 +13,12 @@ describe('JokenPo', () => {
     });
 
     test('não é uma jogada inválida', () => {
-      const jogador1 = 'asdf';
-      const jogador2 = 'Pedra';
       //@ts-ignore
-      const resultado = jokenPoJuiz.verificar(jogador1, jogador2);
-      expect(resultado).toEqual('Jogada Inválida');
+      expect(() => jokenPoJuiz.verificar('Lagarto', 'Papel')).toThrowError(new Error(`Lagarto não é uma jogada válida`))
+      //@ts-ignore
+      expect(() => jokenPoJuiz.verificar('Pedra', 'Spock')).toThrowError(new Error(`Spock não é uma jogada válida`))
+      //@ts-ignore
+      expect(() => jokenPoJuiz.verificar('Lagarto', 'Spock')).toThrowError(new Error(`Lagarto e Spock não são jogadas válidas`))
     })
 
     test('Pedra ganha de Tesoura', () => {
