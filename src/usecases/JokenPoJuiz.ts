@@ -1,3 +1,4 @@
+import { JogadaValida } from "../@types"
 import { JogadaInvalida } from "../errors/jogada-invalida"
 
 export default class JokenPoJuiz {

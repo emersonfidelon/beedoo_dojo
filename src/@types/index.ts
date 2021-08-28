@@ -1,1 +1,1 @@
-type JogadaValida = 'Pedra' | 'Papel' | 'Tesoura'
+export type JogadaValida = 'Pedra' | 'Papel' | 'Tesoura'
