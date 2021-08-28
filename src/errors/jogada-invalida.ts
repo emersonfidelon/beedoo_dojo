@@ -1,3 +1,5 @@
+import { JogadaValida } from "../@types"
+
 export class JogadaInvalida {
 
   static lacarErro(jogadasValidas: Array<JogadaValida>, jogada1: JogadaValida, jogada2: JogadaValida) {
