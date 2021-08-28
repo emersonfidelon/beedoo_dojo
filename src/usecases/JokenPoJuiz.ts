@@ -1,25 +1,27 @@
+import { JogadaValida } from "../@types"
+import { JogadaInvalida } from "../errors/jogada-invalida"
+
 export default class JokenPoJuiz {
-    private readonly jogadasValidas = ['Pedra', 'Papel', 'Tesoura'];
-        
-    private readonly jogadasGanhadoras = {
-        'PedraTesoura':'Pedra ganhou',
-        'TesouraPedra':'Pedra ganhou',
-        'TesouraPapel':'Tesoura ganhou',
-        'PapelTesoura':'Tesoura ganhou',
-        'PapelPedra':'Papel ganhou',
-        'PedraPapel':'Papel ganhou',
+  constructor(private readonly jogadasValidas: Array<JogadaValida>) { }
+
+  verificar(jogador1: JogadaValida, jogador2: JogadaValida): String {
+    if (!this.jogadasValidas.includes(jogador1) || !this.jogadasValidas.includes(jogador2)) {
+      JogadaInvalida.lacarErro(this.jogadasValidas, jogador1, jogador2)
     }
 
-    verificar(jogador1, jogador2): String {
-        if (!this.jogadasValidas.includes(jogador1) || !this.jogadasValidas.includes(jogador2)) {
-            return 'Jogada Inválida';
-        }
+    return this.jogadaVencedora([jogador1, jogador2])
+  }
 
-        if (jogador1 == jogador2) {
-            return 'Empate';
-        }
+  private jogadaVencedora(jogadas: Array<JogadaValida>): String {
+    if (jogadas.some(jogada => jogada === 'Papel') && jogadas.some(jogada => jogada === 'Pedra'))
+      return 'Papel ganhou'
 
-        return this.jogadasGanhadoras[`${jogador1}${jogador2}`]
+    if (jogadas.some(jogada => jogada === 'Papel') && jogadas.some(jogada => jogada === 'Tesoura'))
+      return 'Tesoura ganhou'
 
-    }
+    if (jogadas.some(jogada => jogada === 'Pedra') && jogadas.some(jogada => jogada === 'Tesoura'))
+      return 'Pedra ganhou'
+
+    return 'Empate'
+  }
 }

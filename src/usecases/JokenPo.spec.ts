@@ -1,24 +1,26 @@
 import JokenPoJuiz from './JokenPoJuiz'
 
 describe('JokenPo', () => {
-  const jokenPoJuiz = new JokenPoJuiz();
+  const jokenPoJuiz = new JokenPoJuiz(['Pedra', 'Papel', 'Tesoura']);
   describe('Juiz', () => {
 
     test('vericar empate entre dois jogadores', () => {
       const jogador1 = 'Tesoura';
       const jogador2 = jogador1;
-      const jokenPoJuiz = new JokenPoJuiz();
+      const jokenPoJuiz = new JokenPoJuiz(['Pedra', 'Papel', 'Tesoura']);
       const resultado = jokenPoJuiz.verificar(jogador1, jogador2);
       expect(resultado).toEqual('Empate');
     });
-  
+
     test('não é uma jogada inválida', () => {
-      const jogador1 = 'asdf';
-      const jogador2 = 'Pedra';
-      const resultado = jokenPoJuiz.verificar(jogador1, jogador2);
-      expect(resultado).toEqual('Jogada Inválida');
+      //@ts-ignore
+      expect(() => jokenPoJuiz.verificar('Lagarto', 'Papel')).toThrowError(new Error(`Lagarto não é uma jogada válida`))
+      //@ts-ignore
+      expect(() => jokenPoJuiz.verificar('Pedra', 'Spock')).toThrowError(new Error(`Spock não é uma jogada válida`))
+      //@ts-ignore
+      expect(() => jokenPoJuiz.verificar('Lagarto', 'Spock')).toThrowError(new Error(`Lagarto e Spock não são jogadas válidas`))
     })
-  
+
     test('Pedra ganha de Tesoura', () => {
       const jogador1 = 'Pedra';
       const jogador2 = 'Tesoura';
@@ -53,7 +55,7 @@ describe('JokenPo', () => {
     })
 
   })
-})  
+})
 
 // Jokenpo é uma brincadeira japonesa, onde dois jogadores escolhem um dentre três possíveis itens: Pedra, Papel ou Tesoura.
 

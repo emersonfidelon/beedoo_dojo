@@ -1,0 +1,1 @@
+export type JogadaValida = 'Pedra' | 'Papel' | 'Tesoura'
