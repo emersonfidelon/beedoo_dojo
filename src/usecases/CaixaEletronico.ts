@@ -1,24 +1,67 @@
-export function caixaEletronico(valor_saque:number) {
-
-    const notas_disponiveis = [100, 50, 20,10];
-
-    if(notas_disponiveis.includes(valor_saque)) {
-        return valor_saque;
-    }
-    
-    if(valor_saque % 10 !==0){
-        return 'Ná há notas disponíveis para o valor informado.';
-    }
-
-    let notas = []
-    notas_disponiveis.map(nota => {
-        while (valor_saque < nota) {
-            
-        }
-    })
-
-    return 'Entregar 1 nota de R$100,00 e 1 nota de R$ 10,00.';
+type NotaType = {
+  cedula: string
+  quantidade: number
 }
+
+export class CaixaEletronico {
+
+  constructor(private cedulas_disponiveis: Array<number>) { }
+
+  sacarToString(valor_saque: number) {
+    const { notas } = this.sacar(valor_saque)
+
+    const result = 'Entregar ' + notas.map(nota => (
+      `${nota.quantidade} ${nota.quantidade > 1 ? "notas" : "nota"} de ${nota.cedula}`
+    )).join(', ')
+
+    return result + '.'
+  }
+
+  private sacar(valor_saque: number) {
+    if (valor_saque % 10 !== 0)
+      throw new Error('Ná há notas disponíveis para o valor informado.')
+
+    const cedulas: Array<number> = []
+    let notas: Array<NotaType> = []
+    let i = 0
+
+    while (valor_saque > 0) {
+      if (valor_saque - this.cedulas_disponiveis[i] >= 0) {
+
+        cedulas.push(this.cedulas_disponiveis[i])
+
+        notas = this.addCedulaInNotas(notas, this.cedulas_disponiveis[i].toString())
+
+        valor_saque -= this.cedulas_disponiveis[i]
+      }
+      else
+        i++
+    }
+
+    return {
+      notas,
+      cedulas
+    }
+  }
+
+  private addCedulaInNotas(notas: Array<NotaType>, cedula: string) {
+    const idx = notas.findIndex(nota => nota.cedula === cedula)
+    if (idx >= 0) {
+      notas[idx].quantidade += 1
+    }
+    else {
+      const newCedula = {
+        cedula,
+        quantidade: 1
+      }
+      notas.push(newCedula)
+    }
+
+    return notas
+  }
+
+}
+
 
 
 
