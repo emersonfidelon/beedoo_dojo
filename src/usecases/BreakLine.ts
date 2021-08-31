@@ -2,6 +2,7 @@ class BreakLine {
   text: string;
   columns: number;
   countBreakLine: number = 0;
+  finalText: string;
 
   constructor(text:string, columns:number){
     this.text = text;
@@ -11,18 +12,20 @@ class BreakLine {
   }
 
 handle(){
-      let formattedText = '';
-      for(const word of this.text.split('')){
-        if(formattedText.length < this.columns){
-            formattedText.concat(` ${word}`)
- 
-           } else {
-            formattedText.concat('\n')
-                this.countBreakLine++;
-            }   
-        }
-
-        return formattedText;
+    this.finalText = '';
+    let line = '';
+    for (const word of this.text.split(' ')) {
+      const newLine = `${line} ${word}`;
+      if (newLine.length <= this.columns) {
+        line += `${word} `;
+      } else {
+        line += '\n';
+        this.finalText += line;
+        line = `${word} `;
+      }
+    }
+    this.finalText += line;
+    return this.finalText;
     }
 
     validate() {
@@ -36,6 +39,8 @@ handle(){
 
         if (!Number.isInteger(this.columns)) {
             throw new Error('A quantidade de coluna deve ser um inteiro')
+        } else {
+            this.handle();
         }
     }
 }
