@@ -11,7 +11,7 @@ class BreakLine {
     this.validate();
   }
 
-  handle() {
+  handle(): string {
     this.finalText = '';
     let line = '';
     this.text.split(' ').forEach((word) => {
