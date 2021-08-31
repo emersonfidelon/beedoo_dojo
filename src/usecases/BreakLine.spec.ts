@@ -1,49 +1,47 @@
-import { BreakLine } from "./BreakLine";
+import BreakLine from './BreakLine';
 
-describe('Break Line', () => {
-  let quebraDeLinhas;
-  let frasesComQuebraDeLinha;
-
-  test('Verifica se a entrada esta correta', () => {
-    const frase = 'teste um dois tres';
-    const colunas = 20;
-    const quebraDeLinhas = new BreakLine(frase, colunas); 
-    expect(quebraDeLinhas).toBeInstanceOf(BreakLine);
+describe('# Break Line #', () => {
+  test('check if the entry is correct', () => {
+    const text = 'teste um dois tres';
+    const columns = 20;
+    const breakLine = new BreakLine(text, columns);
+    expect(breakLine).toBeInstanceOf(BreakLine);
   });
 
-  test('Retorna erro com uma frase vazia', () => {
-    const frase = '';
-    const colunas = 20;
-    expect(() => {new BreakLine(frase, colunas)}).toThrow(new Error('A frase deve conter ao menos um caractere'));
+  test('return error when text is empty', () => {
+    const text = '';
+    const columns = 20;
+    expect(() => new BreakLine(text, columns))
+      .toThrow(new Error('A frase deve conter ao menos um caractere'));
   });
 
-  test('Retorna erro quando colunas for menor que 1', () => {
-    const frase = 'teste um dois tres';
-    const colunas = 0;
-    expect(() => {new BreakLine(frase, colunas)}).toThrow(new Error('A quantidade de coluna deve ser maior do que zero'));
+  test('return error when columns is less than 1', () => {
+    const text = 'teste um dois tres';
+    const columns = 0;
+    expect(() => new BreakLine(text, columns))
+      .toThrow(new Error('A quantidade de coluna deve ser maior do que zero'));
   });
 
-  test('Retorna erro quanto o numero de colunas nao for um inteiro', () => {
-    const frase = 'teste um dois tres';
-    const colunas = 12.2;
-    expect(() => {new BreakLine(frase, colunas)}).toThrow(new Error('A quantidade de coluna deve ser um inteiro'));
+  test('return error when columns is not an integer', () => {
+    const text = 'teste um dois tres';
+    const columns = 12.2;
+    expect(() => new BreakLine(text, columns))
+      .toThrow(new Error('A quantidade de coluna deve ser um inteiro'));
   });
 
-  //const getArray = new BreakLine('teste um dois tres', 4).handle().split('\n')
-
-  test.each([[`um cinco`, 10],[`frase um`, 8]]
-  )(`Valida se a frase %p contem menos que %p colunas`, (firstArg, expectedResult) => {
-    expect(firstArg.length).toBeLessThanOrEqual(expectedResult);
+  test('return formatted text when text has fewer columns than entered', () => {
+    const text = 'um cinco';
+    const columns = 10;
+    const breakLine = new BreakLine(text, columns);
+    expect(breakLine.finalText).toBe('um cinco ');
   });
 
-})
-
-// Escreva um programa em que dado uma frase e a quantidade de colunas que podem ser exibidas na tela, faça a quebra de linhas sem quebrar as palavras.
-
-// Por exemplo, se passarmos a frase "Um pequeno jabuti xereta viu dez cegonhas felizes." e pedirmos para ela ser exibida em 20 colunas, teremos como resposta:
-
-// Um pequeno jabuti
-
-// xereta viu dez
-
-// cegonhas felizes.
+  test('return formatted text when text has more columns than entered', () => {
+    const text = 'Um pequeno jabuti xereta viu dez cegonhas felizes.';
+    const columns = 20;
+    const breakLine = new BreakLine(text, columns);
+    expect(breakLine.finalText).toBe(
+      'Um pequeno jabuti \nxereta viu dez \ncegonhas felizes. ',
+    );
+  });
+});
