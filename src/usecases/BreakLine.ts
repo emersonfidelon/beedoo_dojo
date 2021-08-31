@@ -1,6 +1,8 @@
 class BreakLine {
   text: string;
+
   columns: number;
+
   finalText: string;
 
   constructor(text: string, columns: number) {
@@ -10,37 +12,37 @@ class BreakLine {
   }
 
   handle() {
-    this.finalText = "";
-    let line = "";
-    for (const word of this.text.split(" ")) {
+    this.finalText = '';
+    let line = '';
+    this.text.split(' ').forEach((word) => {
       const newLine = `${line} ${word}`;
       if (newLine.length <= this.columns) {
         line += `${word} `;
       } else {
-        line += "\n";
+        line += '\n';
         this.finalText += line;
         line = `${word} `;
       }
-    }
+    });
     this.finalText += line;
     return this.finalText;
   }
 
   validate() {
     if (this.text.length === 0) {
-      throw new Error("A frase deve conter ao menos um caractere");
+      throw new Error('A frase deve conter ao menos um caractere');
     }
 
     if (this.columns < 1) {
-      throw new Error("A quantidade de coluna deve ser maior do que zero");
+      throw new Error('A quantidade de coluna deve ser maior do que zero');
     }
 
     if (!Number.isInteger(this.columns)) {
-      throw new Error("A quantidade de coluna deve ser um inteiro");
+      throw new Error('A quantidade de coluna deve ser um inteiro');
     } else {
       this.handle();
     }
   }
 }
 
-export { BreakLine };
+export default BreakLine;
