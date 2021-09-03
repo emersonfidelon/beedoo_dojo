@@ -1,26 +1,21 @@
 class GroupNumbers {
-  handle (list: Array<number>) {
-    const result = []    
-    let currentGroup = []
-    
-    list.forEach((item, index) => {
-      let check = typeof list[index + 1] !== 'undefined' ? list[index + 1] - item : 0 // 1 - 2 
-      if(check == 1){
-        currentGroup.push(item) // [1,2]
-      }else{        
-        if(item == list[list.length-1]){
-          currentGroup.push(item)
-          result.push(currentGroup)    
-        }        
-        else {
-          result.push(currentGroup) // []
-          currentGroup = []
-          currentGroup.push(item) // [5]
-        }
+  handle(list: number[]) {
+    const result: number[][] = [] // number[][] === Array<Array<number>>
+    let currentGroup: number[] = []
+    const check = (actual: number, next: any) => next !== undefined ? next - actual : next
+    for (let i = 0; i < list.length; i++) {
+      const actual = list[i]
+      const next = list[i + 1]
+      if (check(actual, next) === 1) {
+        currentGroup.push(actual)
+      } else {
+        currentGroup.push(actual)
+        result.push(currentGroup)
+        currentGroup = []
       }
-    })
-    console.log(result)
-    return result.length == 1 ? result[0] : result
+    }
+    // console.log(result)
+    if (result.length > 1) { return result } else { return result[0] }
   }
 }
 
