@@ -3,9 +3,9 @@
 
 Este repositório foi criado com intuito de disponibilizar um ambiente para estudo, treinamento e melhoria continua de código. Se você está participando de algum processo para o Beedoo utilize-o da sequinte maneira:
 
-1 - Escolha uma das branchs disponíveis (desconsidere a master na sua escolha)  
-2 - Aplique as melhorias de código que achar mais conveniente  
-3 - Caso os teste não esteja finalizado, finalize-o  
+1 - Escolha uma das branchs disponíveis (desconsidere a master na sua escolha)
+2 - Aplique as melhorias de código que achar mais conveniente
+3 - Caso os testes não estejam finalizados, finalize-os
 4 - Recomendamos a utilização de commits pequenos
 
 ## Desafio: GroupNumbers
